@@ -1,5 +1,5 @@
 language_name = "English"  # Shown in language picker for multi-language sites.
-date_locale = "en_GB"
+date_locale = "en_CA"
 full_stop = "."  # Used at the end of a sentence.
 
 # Menu items.

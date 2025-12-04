@@ -1,5 +1,5 @@
 language_name = "Français"  # Shown in language picker for multi-language sites.
-date_locale = "fr_FR"
+date_locale = "fr_CA"
 full_stop = "."  # Used at the end of a sentence.
 
 # Menu items.
@@ -31,7 +31,7 @@ one_posts = "$NUMBER article"
 many_posts = "$NUMBER articles"
 prev = "Précédent"  # As in "Previous" page.
 next = "Suivant"  # As in "Next" page.
-of = "sur"  # E.g. Page 1 "of" 3
+of = "de"  # E.g. Page 1 "of" 3
 all_posts = "Tous les articles"
 all_tags = "Toutes les étiquettes"
 all_projects = "Tous les projets"
