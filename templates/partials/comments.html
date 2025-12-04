@@ -29,59 +29,6 @@
     {% endif %}
     data-lazy-loading="{{ config.extra.giscus.lazy_loading }}"
     >
-
-{% elif comment_system == "utterances" %}
-    data-repo="{{ config.extra.utterances.repo }}"
-    {% if config.extra.utterances.issue_term == "slug" %}
-        data-issue-term="{{ page.slug }}"
-    {% else %}
-        data-issue-term="{{ config.extra.utterances.issue_term }}"
-    {% endif %}
-    data-label="{{ config.extra.utterances.label }}"
-    data-light-theme="{{ config.extra.utterances.light_theme }}"
-    data-dark-theme="{{ config.extra.utterances.dark_theme }}"
-    data-lazy-loading="{{ config.extra.utterances.lazy_loading }}"
-    >
-
-{% elif comment_system == "hyvortalk" %}
-    data-website-id="{{ config.extra.hyvortalk.website_id }}"
-    {% if config.extra.hyvortalk.page_id_is_slug %}
-        data-page-id="{{ page.slug }}"
-    {% else %}
-        data-page-id="{{ current_url }}"
-    {% endif %}
-    {% if config.extra.hyvortalk.lang  %}
-        data-page-language="{{ config.extra.hyvortalk.lang }}"
-    {% else %}
-        data-page-language="{{ lang }}"
-    {% endif %}
-    data-page-author="{{ config.extra.hyvortalk.page_author }}"
-    {% if config.extra.hyvortalk.lazy_loading  %}
-        data-loading="lazy"
-    {% else %}
-        data-loading="default"
-    {% endif %}
-    >
-
-{% elif comment_system == "isso" %}
-    data-endpoint-url="{{ config.extra.isso.endpoint_url }}"
-    {% if config.extra.isso.page_id_is_slug %}
-    {%- set default_lang_url = current_path | replace(from='/' ~ lang ~ '/', to = '/') -%}
-        data-isso-id="{{ default_lang_url }}"
-        data-title="{{ default_lang_url }}"
-    {% endif %}
-    {% if config.extra.isso.lang  %}
-        data-page-language="{{ config.extra.isso.lang }}"
-    {% else %}
-        data-page-language="{{ lang }}"
-    {% endif %}
-    data-max-comments-top="{{ config.extra.isso.max_comments_top }}"
-    data-max-comments-nested="{{ config.extra.isso.max_comments_nested }}"
-    data-avatar="{{ config.extra.isso.avatar }}"
-    data-voting="{{ config.extra.isso.voting }}"
-    data-page-author-hashes="{{ config.extra.isso.page_author_hashes }}"
-    data-lazy-loading="{{ config.extra.isso.lazy_loading }}"
-    >
 {% endif %}
 
 {% if automatic_loading %}

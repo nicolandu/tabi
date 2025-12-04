@@ -3,10 +3,7 @@ content="default-src 'self'
 {%- if config.extra.allowed_domains -%}
 ;
     {#- Check if a comment system is enabled to allow the necessary domains and directives -#}
-    {%- set utterances_enabled = config.extra.utterances.enabled_for_all_posts or page.extra.utterances -%}
     {%- set giscus_enabled = config.extra.giscus.enabled_for_all_posts or page.extra.giscus -%}
-    {%- set hyvortalk_enabled = config.extra.hyvortalk.enabled_for_all_posts or page.extra.hyvortalk -%}
-    {%- set isso_enabled = config.extra.isso.enabled_for_all_posts or page.extra.isso -%}
     {%- if page -%}
         {%- set iine_enabled = macros_settings::evaluate_setting_priority(setting="iine", page=page, default_global_value=false) == "true" -%}
     {%- endif -%}
@@ -41,16 +38,7 @@ content="default-src 'self'
         {%- endif -%}
     {%- endif -%}
 
-    {%- if hyvortalk_enabled -%}
-        {%- set connect_src = connect_src ~ " talk.hyvor.com" -%}
-        {%- set script_src = script_src ~ " talk.hyvor.com" -%}
-    {%- elif isso_enabled -%}
-        {%- set connect_src = connect_src ~ " " ~ config.extra.isso.endpoint_url -%}
-        {%- set script_src = script_src ~ " " ~ config.extra.isso.endpoint_url -%}
-    {%- elif giscus_enabled -%}
-        {%- set script_src = script_src ~ " " ~ " giscus.app" -%}
-    {%- elif utterances_enabled -%}
-        {%- set script_src = script_src ~ " " ~ " utteranc.es" -%}
+    {%- if giscus_enabled -%}
     {%- endif -%}
 
     {%- if (mermaid_enabled and not serve_local_mermaid) or iine_enabled -%}
@@ -88,21 +76,9 @@ content="default-src 'self'
         {#- Handle directives that are not connect-src -#}
         {{ domain.directive }} {{ domain.domains | join(sep=' ') | safe -}}
 
-        {%- if domain.directive == "style-src" -%}
-            {%- if utterances_enabled or hyvortalk_enabled or mermaid_enabled %} 'unsafe-inline'
-            {%- endif -%}
-        {%- endif -%}
-
         {%- if domain.directive == "font-src" -%}
             {%- if mermaid_enabled %} 'self'
             {%- endif -%}
-        {%- endif -%}
-
-        {%- if domain.directive == "frame-src" -%}
-            {%- if giscus_enabled %} giscus.app
-            {%- elif utterances_enabled %} utteranc.es
-            {%- elif hyvortalk_enabled %} talk.hyvor.com
-            {%- endif %}
         {%- endif -%}
 
         {%- if not loop.last -%}
