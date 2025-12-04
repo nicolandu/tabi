@@ -129,7 +129,7 @@
                     {% endif %}
 
                     <h2 class="bloglist-title">
-                        <a href="{{ post.permalink }}">{{ post.title }}</a>
+                        <a href="{{ post.permalink }}">{{ post.title | markdown(inline=true) | safe }}</a>
                     </h2>
 
                     {% if post.taxonomies.tags %}
