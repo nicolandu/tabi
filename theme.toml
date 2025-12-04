@@ -222,6 +222,7 @@ invert_title_order = false
 
 # Full path after the base URL required. So if you were to place it in "static" it would be "/favicon.ico"
 # favicon = ""
+# favicon_svg = ""
 
 # Add an emoji here to use it as favicon.
 # Compatibility: https://caniuse.com/link-icon-svg
