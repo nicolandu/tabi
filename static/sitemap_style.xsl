@@ -14,7 +14,7 @@
     <xsl:template match="/sitemap:urlset">
         <html>
             <head>
-                <title>Sitemap • <xsl:value-of select="$clean_base_url"/></title>
+                <title>Sitemap&#160;• <xsl:value-of select="$clean_base_url"/></title>
                 <link rel="stylesheet" href="{$baseUrl}main.css"/>
                 <script src="{$baseUrl}js/sortTable.min.js" defer="defer"></script>
             </head>

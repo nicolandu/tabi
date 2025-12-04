@@ -105,3 +105,6 @@ tip = "Tip"
 info = "Info"
 warning = "Warning"
 danger = "Danger"
+
+# Version info
+commit = "Commit"

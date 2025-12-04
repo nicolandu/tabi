@@ -97,12 +97,20 @@
         <div class="credits">
             <small>
                 {% include "partials/copyright.html" %}
+                {% set commit = get_env(name=config.extra.git_commit_env_var, default = "") %}
 
                 {# Shows link to remote repository #}
                 {%- if config.extra.remote_repository_url and config.extra.show_remote_source | default(value=true) -%}
-                    <a rel="{{ rel_attributes }}" {{ blank_target }} href="{{ config.extra.remote_repository_url }}">
-                        {{ macros_translate::translate(key="site_source", default="Site source", language_strings=language_strings) }}
-                    </a>
+                    {%- if commit -%}
+                        {{ macros_translate::translate(key="commit", default="Commit", language_strings=language_strings) }}
+                        <a rel="{{ rel_attributes }}" {{ blank_target }} href="{% include "partials/commit_url_base.html" -%} {{- commit }}">
+                            {{ commit | truncate(length=7, end="") }}
+                        </a>
+                    {%- else -%}
+                        <a rel="{{ rel_attributes }}" {{ blank_target }} href="{{ config.extra.remote_repository_url }}">
+                            {{ macros_translate::translate(key="site_source", default="Site source", language_strings=language_strings) }}
+                        </a>
+                    {%- endif -%}
                 {%- endif -%}
             </small>
         </div>
