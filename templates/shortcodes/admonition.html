@@ -1,5 +1,11 @@
+{%- import "macros/translate.html" as macros_translate -%}
 {%- set type = type | default(value="info") -%}
-{%- set title = title | default(value=type | upper) -%}
+{%- set default_title = type -%}
+{%- set language_strings = load_data(path="themes/tabi/i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if language_strings -%}
+    {%- set default_title = macros_translate::translate(key=default_title, default=default_title, language_strings=language_strings) -%}
+{%- endif -%}
+{%- set title = title | default(value=default_title | upper) -%}
 {%- set icon = icon | default(value=type) -%}
 {%- set text = text | default(value=body) -%}
 
