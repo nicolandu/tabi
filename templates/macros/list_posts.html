@@ -5,7 +5,7 @@
 {# `paginator` is only used to compute indexes metadata and can be let empty otherwise. #}
 {% macro list_posts(posts, all_posts="", max=999999, metadata="dates", language_strings="", section_path="", paginator="", pinned_first=false, current_page=1) %}
 
-{%- set separator = config.extra.separator | default(value="•") -%}
+{%- set separator = config.extra.separator | default(value="·") -%}
 
 {# Separate pinned and regular posts from all_posts if available, otherwise from posts #}
 {% if pinned_first %}

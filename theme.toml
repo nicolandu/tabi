@@ -191,7 +191,7 @@ short_date_format = ""
 # ]
 
 # Custom separator used in title tag and posts metadata (between date, time to read, and tags).
-separator = "•"
+separator = "·"
 
 # Use a shorter layout for All tags listing.
 # Default: tag_name – n post[s]
@@ -210,7 +210,7 @@ tag_sorting = "name"
 enable_cards_tag_filtering = true
 
 # Invert the order of the site title and page title in the browser tab.
-# Example: true => "Blog • ~/tabi", false => "~/tabi • Blog"
+# Example: true => "Blog · ~/tabi", false => "~/tabi · Blog"
 invert_title_order = false
 
 # Full path after the base URL required. So if you were to place it in "static" it would be "/favicon.ico"

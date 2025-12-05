@@ -9,7 +9,7 @@
       </xsl:attribute>
       <head>
         <title>
-          <xsl:value-of select="/atom:feed/atom:title"/> • Feed
+          <xsl:value-of select="/atom:feed/atom:title"/>&#160;· Feed
         </title>
         <meta charset="utf-8"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
