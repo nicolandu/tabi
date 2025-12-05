@@ -259,6 +259,11 @@ p {
   line-height: 2rem;
 }
 
+sup,
+sub {
+  line-height: 0;
+}
+
 strong {
   font-weight: 580;
 }
