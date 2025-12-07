@@ -1,7 +1,7 @@
 /* Gruvbox theme */
 :root {
   --codeblock-fg: #fdf4c1;
-
+  /* --codeblock-bg varies based on theme, and it is set in _main.scss */
   --codeblock-red: #fa5c4b;
   --codeblock-orange: #fe8019;
   --codeblock-yellow: #fabd2f;
@@ -18,154 +18,46 @@
   background-color: var(--codeblock-bg);
 }
 
-.z-variable,
-.z-variable.z-language,
-.z-meta.z-function-call,
-.z-invalid,
-.z-text .z-source,
-.z-source .z-source,
-.z-string.z-unquoted.z-label.z-js {
-  color: var(--codeblock-fg);
-}
-
-/* Strings */
-.z-string,
-.z-string.z-unquoted.z-heredoc,
-.z-string.z-quoted .z-source,
-.z-constant.z-character.z-escape,
-.z-string.z-regexp .z-constant.z-character.z-escape {
-  color: var(--codeblock-green);
-}
-
-/* Comments */
-.z-comment,
-.z-keyword.z-other.z-phpdoc {
-  color: var(--codeblock-grey);
-  font-style: italic;
-}
-
-/* Constants */
-.z-constant,
-.z-keyword.z-other.z-unit.z-css,
-.z-constant.z-numeric.z-css {
-  color: var(--codeblock-purple);
-}
-
-.z-constant.z-other {
-  color: var(--codeblock-fg);
-}
-
-.z-constant.z-other.z-color.z-rgb-value {
-  color: var(--codeblock-blue);
-}
-
-/* Entities */
-.z-entity,
-.z-support.z-class,
-.z-entity.z-name.z-tag,
-.z-meta.z-tag,
-.z-meta.z-tag .z-entity,
-.z-meta.z-function-call .z-variable.z-function,
-.z-entity.z-name.z-type.z-class.z-php,
-.z-dired.z-item.z-directory,
-.z-storage.z-type.z-dired.z-item.z-directory {
-  color: var(--codeblock-aqua);
-}
-
-.z-entity.z-name.z-tag,
-.z-markup.z-heading {
-  font-weight: bold;
-}
-
-/* Keywords */
-.z-keyword,
-.z-keyword.z-operator.z-new,
 .z-keyword.z-other,
 .z-keyword.z-control,
-.z-support.z-shell,
-.z-storage {
+.z-storage.z-modifier,
+.z-storage.z-type.z-function,
+.z-storage.z-type.z-enum {
   color: var(--codeblock-red);
+}
+
+.z-storage.z-type,
+.z-annotation.z-parameters {
+  color: var(--codeblock-yellow);
 }
 
 .z-keyword.z-operator,
-.z-keyword.z-operator.z-comparison,
-.z-keyword.z-operator.z-symbolic,
-.z-keyword.z-operator.z-string,
-.z-keyword.z-operator.z-assignment,
-.z-keyword.z-operator.z-arithmetic,
-.z-keyword.z-operator.z-class,
-.z-keyword.z-operator.z-key,
-.z-keyword.z-operator.z-logical {
+.z-punctuation {
   color: var(--codeblock-orange);
 }
 
-/* Support */
-.z-support,
-.z-support.z-constant,
-.z-storage.z-type,
-.z-meta.z-property-value .z-constant,
-.z-meta.z-constructor.z-argument.z-css {
-  color: var(--codeblock-yellow);
-}
-
-.z-meta.z-property-value .z-support.z-constant.z-named-color.z-css {
-  color: var(--codeblock-orange);
-}
-
-/* CSS selectors */
-.z-meta.z-selector.z-css,
-.z-entity.z-other.z-attribute-name.z-id,
-.z-meta.z-selector.z-css .z-entity.z-other.z-attribute-name.z-class,
-.z-punctuation.z-definition.z-entity.z-css {
+.z-support.z-function,
+.z-name.z-function {
   color: var(--codeblock-green);
 }
 
-.z-meta.z-selector.z-css .z-entity.z-name.z-tag {
-  color: var(--codeblock-red);
-}
-
-/* Punctuation */
-.z-punctuation.z-definition.z-tag {
-  color: var(--codeblock-blue);
-}
-
-.z-punctuation.z-definition.z-entity {
-  color: var(--codeblock-purple);
-}
-
-/* Markup */
-.z-meta.z-diff,
-.z-meta.z-diff.z-header {
-  color: var(--codeblock-blue);
-}
-
-.z-markup.z-deleted {
-  color: var(--codeblock-red);
-}
-
-.z-markup.z-changed {
-  color: var(--codeblock-yellow);
-}
-
-.z-markup.z-inserted {
+.z-support.z-macro,
+.z-variable.z-annotation {
   color: var(--codeblock-aqua);
 }
 
-.z-markup.z-bold {
-  font-weight: bold;
+.z-parameter {
+  color: var(--codeblock-blue);
 }
 
-.z-markup.z-italic {
-  font-style: italic;
+.z-string,
+.z-constant.z-language,
+.z-constant.z-numeric,
+.z-support.z-type {
+  color: var(--codeblock-purple);
 }
 
-/* SQL */
-.z-constant.z-other.z-table-name.z-sql,
-.z-constant.z-other.z-database-name.z-sql {
-  color: var(--codeblock-green);
-}
-
-/* JS */
-.z-variable.z-language.z-js {
-  color: var(--codeblock-yellow);
+/* Shell */
+.z-variable.z-function.z-shell {
+  color: var(--codeblock-blue);
 }
