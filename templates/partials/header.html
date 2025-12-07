@@ -115,8 +115,14 @@
     {%- if canonical_url -%}
         <link rel="canonical" href="{{ canonical_url }}" />
         <meta property="og:url" content="{{ canonical_url }}" />
+        {%- if config.extra.giscus.enabled_for_all_posts or page.extra.giscus -%}
+            <meta name="giscus:backlink" content="{{ canonical_url }}" />
+        {%- endif -%}
     {%- elif current_url -%}
         <meta property="og:url" content="{{ current_url }}" />
+        {%- if config.extra.giscus.enabled_for_all_posts or page.extra.giscus -%}
+            <meta name="giscus:backlink" content="{{ current_url }}" />
+        {%- endif -%}
     {%- endif -%}
 
     <meta property="og:site_name" content="{{ config.title }}">
