@@ -50,7 +50,7 @@ footer nav {
 
   &>img {
     /* Compensate for text being grey, not black */
-    filter: brightness(0) saturate(1) invert(0.17) sepia(5%) saturate(2.76) hue-rotate(131deg) brightness(95%) contrast(0.9);
+    filter: invert(0.2);
   }
 }
 
