@@ -39,9 +39,10 @@ content="default-src 'self'
     {%- endif -%}
 
     {%- if giscus_enabled -%}
+        {%- set script_src = script_src ~ " " ~ " giscus.app" -%}
     {%- endif -%}
 
-    {%- if (mermaid_enabled and not serve_local_mermaid) or iine_enabled -%}
+    {%- if (mermaid_enabled and not serve_local_mermaid) -%}
         {%- set script_src = script_src ~ " " ~ " cdn.jsdelivr.net" -%}
     {%- endif -%}
 
@@ -81,6 +82,18 @@ content="default-src 'self'
             {%- endif -%}
         {%- endif -%}
 
+        {%- if domain.directive == "frame-src" -%}
+            {%- if giscus_enabled %} giscus.app
+            {%- endif %}
+        {%- endif -%}
+
+        {%- if domain.directive == "style-src" -%}
+            {%- if giscus_enabled %} giscus.app
+            {%- endif %}
+            {%- if mermaid_enabled %} 'unsafe-inline'
+            {%- endif -%}
+        {%- endif -%}
+
         {%- if not loop.last -%}
         ;
         {%- endif -%}
@@ -93,3 +106,4 @@ content="default-src 'self'
     {{ ";" ~ script_src }}
 
 {%- endif -%}">
+
