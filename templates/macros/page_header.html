@@ -1,16 +1,25 @@
 {% macro page_header(title, show_feed_icon=false) %}
 
+
+{# Load the internationalisation data for the current language from
+the .toml files in the user's '/i18n' folder, falling back to the theme's.
+This variable will hold all the text strings for the language #}
+{%- set language_strings = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not language_strings -%}
+    {%- set language_strings = load_data(path="themes/tabi/i18n/" ~ lang ~ ".toml", required=false) -%}
+{%- endif -%}
+
 {% set rel_attributes = macros_rel_attributes::rel_attributes() | trim %}
 
-
 {%- set blank_target = macros_target_attribute::target_attribute(new_tab=config.markdown.external_links_target_blank) -%}
+{%- set feed_label = macros_translate::translate(key="feed", default="feed", language_strings=language_strings) -%}
 
 <h1 class="title-container section-title bottom-divider">
     {{ title -}}
     {% if show_feed_icon %}
         {%- set feed_url = feed_utils::get_feed_url() -%}
-        <a class="no-hover-padding social social-rss" rel="{{ rel_attributes }}" {{ blank_target }} href="{{ get_url(path=term.path ~ feed_url, lang=lang, trailing_slash=false) | safe }}">
-            <img loading="lazy" alt="feed" title="feed" src="{{ get_url(path='/social_icons/rss.svg') }}">
+        <a class="no-hover-padding social social-rss" title="{{ feed_label }}" rel="{{ rel_attributes }}" {{ blank_target }} href="{{ get_url(path=term.path ~ feed_url, lang=lang, trailing_slash=false) | safe }}">
+            <img loading="lazy" alt="{{ feed_label }}" src="{{ get_url(path='/social_icons/rss.svg') }}">
         </a>
     {% endif %}
 </h1>

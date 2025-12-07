@@ -18,5 +18,5 @@
 {%- set lazy_loading = lazy_loading | default(value=true) -%}
 
 <div class="full-width">
-    <img src="{{ image_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if meta.width %} width="{{ meta.width }}"{% endif %}{% if meta.height %} height="{{ meta.height }}"{% endif %}{% if lazy_loading %} loading="lazy"{% endif %}/>
+    <img src="{{ image_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if meta.width %} width="{{ meta.width }}"{% endif %}{% if meta.height %} height="{{ meta.height }}"{% endif %}{% if lazy_loading %} loading="lazy"{% endif %} />
 </div>

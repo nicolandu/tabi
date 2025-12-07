@@ -78,6 +78,10 @@ powered_by = "Powered by"
 and = "&"
 site_source = "Site source"
 
+# Socials
+feed = "feed"
+email = "email"
+
 # 404 error.
 # https://welpo.github.io/tabi/404.html
 page_missing = "The page you've requested seems to be missing"
@@ -108,6 +112,3 @@ tip = "Tip"
 info = "Info"
 warning = "Warning"
 danger = "Danger"
-
-# Version info
-commit = "Commit"

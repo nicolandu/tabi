@@ -78,6 +78,10 @@ powered_by = "Propulsé par"
 and = "et"
 site_source = "Code du site"
 
+# Socials
+feed = "flux"
+email = "courriel"
+
 # 404 error.
 # https://welpo.github.io/tabi/404.html
 page_missing = "La page que vous avez demandée semble être manquante"
@@ -102,12 +106,9 @@ about_feeds = "Ceci est un flux web, également connu sous le nom de flux Atom. 
 visit_the_site = "Visitez le site web"
 recent_posts = "Articles récents"
 
-# admonitions.
+# Admonitions.
 note = "note"
 tip = "truc"
 info = "info"
 warning = "avertissement"
 danger = "danger"
-
-# Version info
-commit = "Commit"

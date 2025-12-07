@@ -36,7 +36,7 @@
 
   {# links #}
   <div>
-    {%- if hcard.with_mail and config.extra.email and not config.extra.encode_plaintext_email -%}
+    {%- if hcard.with_mail and config.extra.email -%}
     <span>
       <a class="u-email" href="mailto:{{ config.extra.email | safe }}">email</a>
     </span> -

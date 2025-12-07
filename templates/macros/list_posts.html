@@ -103,11 +103,11 @@
                                         alt="{{ post.extra.local_image }}"
                                         src="{{ get_url(path=post.extra.local_image) }}"
                                         {% if meta.width %}width="{{ meta.width }}"{% endif %}
-                                        {% if meta.height %}height="{{ meta.height }}"{% endif %}>
+                                        {% if meta.height %}height="{{ meta.height }}"{% endif %} />
                                 {% elif post.extra.remote_image %}
                                     <img class="thumbnail-image"
                                         alt="{{ post.extra.remote_image }}"
-                                        src="{{ post.extra.remote_image }}">
+                                        src="{{ post.extra.remote_image }}" />
                                 {% endif %}
                             </a>
                         </li>

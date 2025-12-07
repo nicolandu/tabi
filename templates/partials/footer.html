@@ -1,3 +1,12 @@
+{# Load the internationalisation data for the current language from
+the .toml files in the user's '/i18n' folder, falling back to the theme's.
+This variable will hold all the text strings for the language #}
+{%- set language_strings = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not language_strings -%}
+    {%- set language_strings = load_data(path="themes/tabi/i18n/" ~ lang ~ ".toml", required=false) -%}
+{%- endif -%}
+
+
 {%- set separator = config.extra.separator | default(value="·") -%}
 
 {%- set rel_attributes = macros_rel_attributes::rel_attributes() | trim -%}
@@ -7,6 +16,8 @@
 {#- Feed icon -#}
 {%- set feed_url = feed_utils::get_feed_url() -%}
 {%- set should_show_feed = feed_utils::should_show_footer_feed_icon() == "true" -%}
+{%- set feed_label = macros_translate::translate(key="feed", default="feed", language_strings=language_strings) -%}
+{%- set email_label = macros_translate::translate(key="email", default="email", language_strings=language_strings) -%}
 
 {%- set should_show_footer_icons = should_show_feed or config.extra.socials or config.extra.email -%}
 
@@ -17,35 +28,17 @@
                 <ul>
                     {%- if should_show_feed -%}
                     <li>
-                        <a class="nav-links no-hover-padding social social-rss" rel="{{ rel_attributes }}" {{ blank_target }} href="{{ get_url(path=feed_url, lang=lang, trailing_slash=false) | safe }}">
-                            <img loading="lazy" alt="feed" title="feed" src="{{ get_url(path='/social_icons/rss.svg') }}">
+                        <a class="nav-links no-hover-padding social social-rss" title="{{ feed_label }}" rel="{{ rel_attributes }}" {{ blank_target }} href="{{ get_url(path=feed_url, lang=lang, trailing_slash=false) | safe }}">
+                            <img loading="lazy" alt="{{ feed_label }}" src="{{ get_url(path='/social_icons/rss.svg') }}" />
                         </a>
                     </li>
                     {%- endif -%}
 
                     {# Mail icon #}
                     {%- if config.extra.email -%}
-                        {%- set email_already_encoded = (config.extra.email is not containing("@")) -%}
-                        {%- set email_needs_decoding = email_already_encoded or config.extra.encode_plaintext_email -%}
-
-                        {%- if email_already_encoded -%}
-                            {%- set encoded_email = config.extra.email -%}
-                            {# Verify the pre-encoded e-mail is valid (i.e. contains an '@') #}
-                            {%- set decoded_email = encoded_email | base64_decode -%}
-                            {%- if '@' not in decoded_email -%}
-                                {{ throw(message="ERROR: The provided e-mail appears to be base64-encoded, but does not decode to a valid e-mail address.")}}
-                            {%- endif -%}
-                        {%- elif config.extra.encode_plaintext_email -%}
-                            {%- set encoded_email = config.extra.email | base64_encode -%}
-                        {%- endif -%}
-
-                        <li class="{% if email_needs_decoding %}js{% endif %}">
-                            {%- if email_needs_decoding -%}
-                                <a class="nav-links no-hover-padding social" href="#" data-encoded-email="{{ encoded_email | safe }}">
-                            {%- else -%}
-                                <a class="nav-links no-hover-padding social" href="mailto:{{ config.extra.email | safe }}">
-                            {%- endif -%}
-                                <img loading="lazy" alt="email" title="email" src="{{ get_url(path='social_icons/email.svg') }}">
+                        <li>
+                            <a class="nav-links no-hover-padding social" title="{{ email_label }}" href="mailto:{{ config.extra.email | safe }}">
+                                <img loading="lazy" alt="{{ email_label }}" src="{{ get_url(path='social_icons/email.svg') }}" />
                             </a>
                         </li>
                     {%- endif -%}
@@ -53,8 +46,8 @@
                     {%- if config.extra.socials %}
                         {% for social in config.extra.socials %}
                             <li>
-                                <a class="nav-links no-hover-padding social social-{{ social.icon }}" rel="{{ rel_attributes }} me" {{ blank_target }} href="{{ social.url | safe }}">
-                                    <img loading="lazy" alt="{{ social.name }}" title="{{ social.name }}" src="{{ get_url(path='social_icons/' ~ social.icon ~ '.svg') }}">
+                                <a class="nav-links no-hover-padding social social-{{ social.icon }}" title="{{ social.name }}" rel="{{ rel_attributes }} me" {{ blank_target }} href="{{ social.url | safe }}">
+                                    <img loading="lazy" alt="{{ social.name }}" src="{{ get_url(path='social_icons/' ~ social.icon ~ '.svg') }}" />
                                 </a>
                             </li>
                         {% endfor %}
@@ -106,11 +99,6 @@
             </small>
         </div>
     </section>
-
-    {# Load the decoding script if email is encoded #}
-    {%- if email_needs_decoding -%}
-        <script src="{{ get_url(path='js/decodeMail.min.js') }}" async></script>
-    {%- endif -%}
 
     {# Modal structure for search #}
     {%- if config.build_search_index -%}
