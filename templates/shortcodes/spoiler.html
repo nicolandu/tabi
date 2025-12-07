@@ -1,3 +1,9 @@
+{%- import "macros/translate.html" as macros_translate -%}
+{%- set language_strings = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not language_strings -%}
+    {%- set language_strings = load_data(path="themes/tabi/i18n/" ~ lang ~ ".toml", required=false) -%}
+{%- endif -%}
+
 {# The `random_id` ensures that each instance of the shortcode has a "unique" id #}
 {# allowing individual interactive elements (like toggles) to function correctly. #}
 {# This avoids conflicts when multiple instances of the shortcode are used. #}
@@ -7,7 +13,7 @@
 
 <label class="spoiler-container{% if fixed_blur %} fixed-blur{% endif %}">
     <input type="checkbox" id="spoiler-{{random_id}}" class="spoiler-toggle" role="button" aria-pressed="false" />
-    <span class="spoiler-content" title="reveal spoiler" tabindex="0">
+    <span class="spoiler-content" title="{{ macros_translate::translate(key="reveal_spoiler", default="reveal spoiler", language_strings=language_strings) }}" tabindex="0">
         <span class="spoiler-hidden">{{ text | markdown | trim_start_matches(pat="<p>") | trim_start_matches(pat="</p>") | safe }}</span>
     </span>
 </label>

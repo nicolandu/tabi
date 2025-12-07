@@ -76,8 +76,6 @@ remote_repository_branch = "main" # Defaults to "main".
 show_remote_changes = true # Defaults to true.
 # Show a link to the repository of the site, right next to the "Powered by Zola & tabi" text.
 show_remote_source = true # Defaults to true.
-# Environment variable containing the current git commit hash.
-git_commit_env_var = "GIT_COMMIT"
 
 # Add a "copy" button to codeblocks (loads ~700 bytes of JavaScript).
 # Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy

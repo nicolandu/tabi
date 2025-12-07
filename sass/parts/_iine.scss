@@ -11,7 +11,7 @@
     -webkit-tap-highlight-color: transparent;
     appearance: none;
     margin: 0;
-    padding: 0;
+    height: 1em;
     font-size: inherit;
     line-height: inherit;
 
@@ -29,9 +29,4 @@
         width: 1em;
         height: 1em;
     }
-}
-
-.iine-auto-buttons {
-    margin-top: 2rem;
-    padding: 1rem 0;
 }

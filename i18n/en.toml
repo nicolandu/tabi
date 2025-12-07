@@ -92,6 +92,9 @@ show_translation = "Show translation"
 open_quotation_mark = "“"
 close_quotation_mark = "”"
 
+# For spoiler shortcode.
+reveal_spoiler = "reveal spoiler"
+
 # Translations for stylised Atom feed.
 # https://welpo.github.io/tabi/atom.xml
 # Must contain "About Feeds"; it will become a link.
