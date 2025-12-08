@@ -22,7 +22,8 @@
 .z-keyword.z-control,
 .z-storage.z-modifier,
 .z-storage.z-type.z-function,
-.z-storage.z-type.z-enum {
+.z-storage.z-type.z-enum,
+.z-storage.z-type.z-module {
   color: var(--codeblock-red);
 }
 
@@ -41,6 +42,7 @@
   color: var(--codeblock-green);
 }
 
+.z-keyword.z-control.z-import,
 .z-support.z-macro,
 .z-variable.z-annotation {
   color: var(--codeblock-aqua);

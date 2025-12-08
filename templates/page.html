@@ -248,6 +248,7 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
             {%- set syntax_patches = [
                 '<span class="z-storage z-type z-rust">let</span>', '<span class="z-keyword z-other z-rust">let</span>',
                 '<span class="z-storage z-type z-rust">const</span>', '<span class="z-keyword z-other z-rust">const</span>',
+                '<span class="z-keyword z-other z-rust">use</span>', '<span class="z-keyword z-control z-import z-rust">use</span>',
                 '<span class="z-storage z-type z-ts">let</span>', '<span class="z-keyword z-other z-ts">let</span>',
                 '<span class="z-storage z-type z-ts">const</span>', '<span class="z-keyword z-other z-ts">const</span>',
             ] -%}
