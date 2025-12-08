@@ -16,5 +16,17 @@
         <div id="image-container-home">
             <img alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path }}" />
         </div>
+    {%- elif header.dual_img -%}
+        {%- if header.dual_img.light is containing("$BASE_URL") or header.dual_img.dark is containing("$BASE_URL") -%}
+            {# Conversion no longer supported in favour of proper path. #}
+            {{ throw(message="ERROR: The image path for the header should not contain '$BASE_URL'. Please remove it and use the proper image path.") }}
+        {%- else -%}
+            {%- set image_path_light = get_url(path=header.dual_img.light, trailing_slash=false) | safe -%}
+            {%- set image_path_dark = get_url(path=header.dual_img.dark, trailing_slash=false) | safe -%}
+        {%- endif -%}
+        <div id="image-container-home">
+            <img class="img-light" alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path_light }}" />
+            <img class="img-dark" alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path_dark }}" />
+        </div>
     {%- endif -%}
 </div>

@@ -12,11 +12,13 @@
     <title>{%- include "partials/title.html" -%}</title>
 
     {# Favicon #}
-    {% if config.extra.favicon %}
-        <link rel="icon" type="image/png" href="{{ get_url(path=config.extra.favicon) }}"/>
-    {% endif %}
     {% if config.extra.favicon_svg %}
-        <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg) }}"/>
+        {#- Fallback -#}
+        <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg) }}" />
+        {% if config.extra.favicon_svg_light %}
+            <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg_dark) }}" media="(prefers-color-scheme: dark)" />
+            <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg_light) }}" media="(prefers-color-scheme: light)" />
+        {% endif %}
     {% endif %}
     {% if config.extra.favicon_emoji %}
         <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">{{ config.extra.favicon_emoji }}</text></svg>'>
