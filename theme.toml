@@ -203,6 +203,7 @@ invert_title_order = false
 
 # Full path after the base URL required. So if you were to place it in "static" it would be "/favicon.svg".
 # Make sure to always have a default favicon, even if you want to split between light and dark.
+# favicon_png = "/favicon-light.png"
 # favicon_svg = "/favicon-light.svg"
 # favicon_svg_light = "/favicon-light.svg"
 # favicon_svg_dark = "/favicon-dark.svg"
