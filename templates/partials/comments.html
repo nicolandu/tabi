@@ -18,8 +18,8 @@
     {% else %}
         data-input-position="bottom"
     {% endif %}
-    data-light-theme="{{ config.extra.giscus.light_theme }}"
-    data-dark-theme="{{ config.extra.giscus.dark_theme }}"
+    data-light-theme="{{ config.base_url }}/giscus-light.css"
+    data-dark-theme="{{ config.base_url }}/giscus-dark.css"
     {% if config.extra.giscus.lang  %}
         data-lang="{{ config.extra.giscus.lang }}"
     {% else %}
