@@ -17,8 +17,8 @@
     {%- set final_label = "Like this post" -%}
 {%- endif -%}
 
+<noscript>You need JavaScript to like this content.</noscript>
 <button class="iine-button" aria-hidden="true"
 {%- if slug %} data-slug="{{ slug }}"{% endif %}
 {%- if button_icon %} data-icon="{{ button_icon }}"{% endif %}
 aria-label="{{ final_label }}" title="{{ final_label }}"></button>
-<noscript>You need JavaScript to like this content.</noscript>
