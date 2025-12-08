@@ -7,10 +7,6 @@ content="default-src 'self'
     {%- if page -%}
         {%- set iine_enabled = macros_settings::evaluate_setting_priority(setting="iine", page=page, default_global_value=false) == "true" -%}
     {%- endif -%}
-    {%- if page -%}
-        {%- set mermaid_enabled = macros_settings::evaluate_setting_priority(setting="mermaid", page=page, default_global_value=false) == "true" -%}
-    {%- endif -%}
-    {%- set serve_local_mermaid = config.extra.serve_local_mermaid | default(value=true) -%}
 
     {#- Initialise a base script-src directive -#}
     {%- set script_src = "script-src 'self'" -%}
@@ -40,10 +36,6 @@ content="default-src 'self'
 
     {%- if giscus_enabled -%}
         {%- set script_src = script_src ~ " " ~ " giscus.app" -%}
-    {%- endif -%}
-
-    {%- if (mermaid_enabled and not serve_local_mermaid) -%}
-        {%- set script_src = script_src ~ " " ~ " cdn.jsdelivr.net" -%}
     {%- endif -%}
 
     {#- Check if a webmention system is enabled to allow the necessary domains and directives -#}
@@ -77,11 +69,6 @@ content="default-src 'self'
         {#- Handle directives that are not connect-src -#}
         {{ domain.directive }} {{ domain.domains | join(sep=' ') | safe -}}
 
-        {%- if domain.directive == "font-src" -%}
-            {%- if mermaid_enabled %} 'self'
-            {%- endif -%}
-        {%- endif -%}
-
         {%- if domain.directive == "frame-src" -%}
             {%- if giscus_enabled %} giscus.app
             {%- endif %}
@@ -90,8 +77,6 @@ content="default-src 'self'
         {%- if domain.directive == "style-src" -%}
             {%- if giscus_enabled %} giscus.app
             {%- endif %}
-            {%- if mermaid_enabled %} 'unsafe-inline'
-            {%- endif -%}
         {%- endif -%}
 
         {%- if not loop.last -%}

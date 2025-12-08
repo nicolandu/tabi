@@ -36,7 +36,7 @@ const getTableCode = (block) => {
         .join('');
 };
 
-document.querySelectorAll('pre:not(.mermaid)').forEach((block) => {
+document.querySelectorAll('pre').forEach((block) => {
     const copyDiv = document.createElement('div');
     copyDiv.setAttribute('role', 'button');
     copyDiv.setAttribute('aria-label', initCopyText);
