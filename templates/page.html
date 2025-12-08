@@ -131,7 +131,7 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
                     {%- set last_author = author_list | last -%}
                     {%- set other_authors = author_list | slice(end=-1) -%}
                     {%- set author_separator = macros_translate::translate(key="author_separator", default=", ", language_strings=language_strings) -%}
-                   {%- set author_separator = '</span>' ~ author_separator ~ '<span class="p-author">' -%}
+                    {%- set author_separator = '</span>' ~ author_separator ~ '<span class="p-author">' -%}
                     {%- set conjunction = macros_translate::translate(key="author_conjunction", default=" and ", language_strings=language_strings) -%}
                     {%- set conjunction = '</span>' ~ conjunction ~ '<span class="p-author">' -%}
                     {%- set author_string = other_authors | join(sep=author_separator) -%}
@@ -243,6 +243,23 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
         <section class="e-content body">
             {#- Replace series_intro placeholder -#}
             {%- set content_with_intro = page.content -%}
+
+            {#- FIXME: This is just a workaround until Zola changes its syntax highlighter. -#}
+            {%- set syntax_patches = [
+                '<span class="z-storage z-type z-rust">let</span>', '<span class="z-keyword z-other z-rust">let</span>',
+                '<span class="z-storage z-type z-rust">const</span>', '<span class="z-keyword z-other z-rust">const</span>',
+                '<span class="z-storage z-type z-ts">let</span>', '<span class="z-keyword z-other z-ts">let</span>',
+                '<span class="z-storage z-type z-ts">const</span>', '<span class="z-keyword z-other z-ts">const</span>',
+            ] -%}
+            {%- for patch in syntax_patches -%}
+                {#- Replace even indices (0-based) with odd indices (can't seem to do double arrays...) -#}
+                {%- if loop.index % 2 == 1 -%} {#- 1-based, here only -#}
+                    {%- set from_elem = syntax_patches | nth(n=loop.index0) -%}
+                    {%- set to_elem = syntax_patches | nth(n=loop.index) -%}
+                    {%- set_global content_with_intro = content_with_intro | replace(from=from_elem, to=to_elem) -%}
+                {%- endif -%}
+            {%- endfor -%}
+
             {%- if "<!-- series_intro -->" in page.content -%}
                 {%- set series_intro_html = macros_series_page::get_introduction(page=page, series_section=series_section, series_ordered_pages=series_ordered_pages, language_strings=language_strings) -%}
                 {%- set content_with_intro = content_with_intro | replace(from="<!-- series_intro -->", to=series_intro_html) -%}
