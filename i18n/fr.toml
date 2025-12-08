@@ -112,3 +112,7 @@ tip = "truc"
 info = "info"
 warning = "avertissement"
 danger = "danger"
+
+# Noscript info.
+iine_noscript = "JavaScript est requis pour aimer ce contenu."
+comments_noscript = "JavaScript est requis pour voir les commentaires."
