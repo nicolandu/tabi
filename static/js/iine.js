@@ -89,8 +89,7 @@
             iineButtons.forEach((button) => {
                 const slug = button.dataset.slug || window.location.pathname;
                 const storageKey = `iine-clicked-${slug}`;
-                // Clear fallback content (e.g. <noscript> text) before building JS structure.
-                button.textContent = "";
+
                 let icon = document.createElement("span");
                 icon.className = "icon";
                 button.appendChild(icon);
