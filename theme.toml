@@ -70,16 +70,12 @@ remote_repository_branch = "main" # Defaults to "main".
 # Show a link to the commit history of updated posts, right next to the last updated date.
 # Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
 show_remote_changes = true # Defaults to true.
-# Show a link to the repository of the site, right next to the "Powered by Zola & tabi" text.
+# Show a link to the repository of the site
 show_remote_source = true # Defaults to true.
 
 # Add a "copy" button to codeblocks (loads ~700 bytes of JavaScript).
 # Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
 copy_button = true
-
-# Make code block names clickable if they are URLs (loads ~400 bytes of JavaScript).
-# Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
-code_block_name_links = false
 
 # Force left-to-right (LTR) direction for code blocks.
 # Set to false to allow code to follow the document's natural direction.
