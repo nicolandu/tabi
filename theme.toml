@@ -29,10 +29,6 @@ homepage = "https://osc.garden"
 # index_format = "elasticlunr_javascript" here.
 # index_format = ""
 
-# Use sans-serif font everywhere.
-# By default, the serif font is only used in articles.
-override_serif_with_sans = false
-
 # Enable JavaScript theme toggler to allow users to switch between dark/light mode.
 # If disabled, your site will use the theme specified in the `default_theme` variable.
 theme_switcher = true
@@ -125,12 +121,6 @@ iine_unified_languages = true
 # It has only effect if the section uses indexes metadata (which is only the case for series as of now).
 # Can be set at section levels, following the hierarchy: section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
 post_listing_index_reversed = false # Defaults to false.
-
-# DEPRECATED!
-# Use Zola's built-in `bottom_footnotes = true` in the [markdown] section instead. (Available since v0.19.0)
-# Adds backlinks to footnotes (loads ~500 bytes of JavaScripts).
-# Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
-footnote_backlinks = false
 
 # Enable KaTeX for all posts.
 # Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
