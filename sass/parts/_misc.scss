@@ -158,21 +158,10 @@ hr {
   font-family: var(--serif-font);
 }
 
-.footnote-definition {
-  margin-block-end: 0.6rem;
-
-  sup {
-    margin-inline-end: 0.15rem;
-    font-size: 0.75rem;
-    font-family: var(--serif-font);
-  }
-
-  p {
-    display: inline;
-  }
+.footnote-reference+.footnote-reference::before {
+  content: ", ";
 }
 
-.footnotes-list a[href^="#fr-"],
 .footnotes a[href^="#fr-"] {
   font-size: 0.8rem;
 }
@@ -181,9 +170,8 @@ hr {
   font-size: 0.8rem;
 }
 
-.references p {
-  margin-inline-start: 2.4rem;
-  text-indent: -2.4rem;
+.footnotes p {
+  margin-bottom: 0.6rem;
 }
 
 .info-box {

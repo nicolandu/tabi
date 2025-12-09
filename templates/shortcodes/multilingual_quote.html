@@ -12,7 +12,8 @@
 {#- allowing individual interactive elements (like toggles) to function correctly. -#}
 {#- This avoids conflicts when multiple instances of the shortcode are used. -#}
 {#- More context: https://github.com/welpo/tabi/issues/82 -#}
-{%- set random_id = get_random(end=100000) -%}
+{%- set random_str = get_random(end=8446744073709551615) | num_format(locale="en") | replace(from=",", to="") -%}
+{%- set random_id = get_hash(literal=random_str) | truncate(length=8, end="") | replace(from="+", to="-") | replace(from="/", to="_") -%}
 
 <div class="quote-container">
     <input type="checkbox" id="toggle-{{ random_id }}" class="quote-toggle">

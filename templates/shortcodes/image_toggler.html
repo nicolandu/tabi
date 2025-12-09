@@ -1,7 +1,8 @@
 {# The `random_id` ensures that each instance of the shortcode has a "unique" id #}
 {# allowing individual interactive elements (like toggles) to function correctly. #}
 {# This avoids conflicts when multiple instances of the shortcode are used. #}
-{%- set random_id = get_random(end=100000) -%}
+{%- set random_str = get_random(end=8446744073709551615) | num_format(locale="en") | replace(from=",", to="") -%}
+{%- set random_id = get_hash(literal=random_str) | truncate(length=8, end="") | replace(from="+", to="-") | replace(from="/", to="_") -%}
 {%- set colocated_path = page.colocated_path | default(value="") -%}
 {%- set lazy_loading = lazy_loading | default(value=true) -%}
 {%- set inline = inline | default(value=false) -%}
