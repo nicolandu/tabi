@@ -79,7 +79,7 @@ and = "et"
 site_source = "Code du site"
 
 # Socials
-feed = "flux"
+feed = "flux atom"
 email = "courriel"
 
 # 404 error.

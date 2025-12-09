@@ -30,7 +30,7 @@ jump_to_posts = "Jump to posts"
 read_more = "Read more"
 one_posts = "$NUMBER post"
 many_posts = "$NUMBER posts"              # "3 posts"
-prev = "Prev"                             # As in "Previous" page.
+prev = "Previous"                         # As in "Previous" page.
 next = "Next"                             # As in "Next" page.
 of = "of"                                 # E.g. Page 1 "of" 3
 all_posts = "All posts"
@@ -79,7 +79,7 @@ and = "&"
 site_source = "Site source"
 
 # Socials
-feed = "feed"
+feed = "atom feed"
 email = "email"
 
 # 404 error.
