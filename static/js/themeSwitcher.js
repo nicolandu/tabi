@@ -49,6 +49,7 @@ if (!defaultTheme) {
         .matchMedia('(prefers-color-scheme: dark)')
         .addEventListener('change', (e) => {
             setTheme(e.matches ? 'dark' : 'light');
+            document.getElementById('favicon-svg').href = e.matches ? '/favicon-dark.svg' : '/favicon.svg';
         });
 }
 

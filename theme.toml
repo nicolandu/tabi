@@ -201,17 +201,6 @@ enable_cards_tag_filtering = true
 # Example: true => "Blog · ~/tabi", false => "~/tabi · Blog"
 invert_title_order = false
 
-# Full path after the base URL required. So if you were to place it in "static" it would be "/favicon.svg".
-# Make sure to always have a default favicon, even if you want to split between light and dark.
-# favicon_png = "/favicon-light.png"
-# favicon_svg = "/favicon-light.svg"
-# favicon_svg_light = "/favicon-light.svg"
-# favicon_svg_dark = "/favicon-dark.svg"
-
-# Add an emoji here to use it as favicon.
-# Compatibility: https://caniuse.com/link-icon-svg
-# favicon_emoji = "🌱"
-
 # Path to the fallback image for social media cards (the preview image shown when sharing a link on WhatsApp, LinkedIn…).
 # Can be set at page or section levels, following the hierarchy: page > section > config. See: https://welpo.github.io/tabi/blog/mastering-tabi-settings/#settings-hierarchy
 # Learn how to create these images in batch and automatically:
