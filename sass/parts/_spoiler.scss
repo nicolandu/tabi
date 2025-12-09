@@ -4,7 +4,7 @@
 
 .spoiler-content {
     display: inline-block; // Allow content to only take up its own width.
-    cursor: help; // Indicate interactive element.
+    cursor: pointer; // Indicate interactive element.
 
     .spoiler-hidden {
         -webkit-user-select: none;
@@ -19,7 +19,11 @@
     }
 }
 
-.spoiler-toggle:checked + .spoiler-content {
+.block-spoiler.spoiler-content {
+    display: block; // Allow content to only take up its own width.
+}
+
+.spoiler-toggle:checked+.spoiler-content {
     .spoiler-hidden {
         filter: none;
         user-select: auto;
@@ -41,7 +45,7 @@
         display: none; // Completely hide the actual content.
     }
 
-    .spoiler-toggle:checked + .spoiler-content {
+    .spoiler-toggle:checked+.spoiler-content {
         &:before {
             content: none; // Hide the word "SPOILER".
         }
