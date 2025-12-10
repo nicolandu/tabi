@@ -6,7 +6,7 @@
 {%- set language_strings = load_data(path="themes/tabi/i18n/" ~ lang ~ ".toml", required=false) -%}
 {%- endif -%}
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="{{ get_url(path='/feed_style.xsl', trailing_slash=false) | safe }}" type="text/xsl"?>
+<?xml-stylesheet href="{{ get_url(path='/feed-style.xsl', trailing_slash=false) | safe }}" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ lang }}">
     <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
         <tabi:base_url>{{ config.base_url }}</tabi:base_url>
