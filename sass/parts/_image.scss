@@ -58,3 +58,40 @@ figure h4::before {
         display: none;
     }
 }
+
+
+[data-theme='dark'] {
+    .img-dark {
+        display: block;
+        &.inline {
+            display: inline;
+        }
+    }
+
+    .img-light {
+        display: none;
+    }
+
+    .monochrome-image {
+        filter: invert(1);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    .img-dark {
+        display: block;
+        &.inline {
+            display: inline;
+        }
+    }
+
+    .img-light {
+        display: none;
+    }
+
+    .monochrome-image {
+        filter: invert(1);
+    }
+  }
+}

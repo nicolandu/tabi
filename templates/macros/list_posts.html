@@ -94,20 +94,42 @@
                         {%- endif -%}
                     {%- endif -%}
 
-                    {% if post.extra.local_image or post.extra.remote_image %}
+                    {% if post.extra.local_image or post.extra.dual_local_image or post.extra.remote_image or post.extra.dual_remote_image %}
                         <li class="post-thumbnail">
                             <a href="{{ post.permalink }}">
                                 {% if post.extra.local_image %}
                                     {% set meta = get_image_metadata(path=post.extra.local_image, allow_missing=true) %}
-                                    <img class="thumbnail-image"
+                                    <img class="thumbnail-image{% if post.extra.monochrome_image %} monochrome-image{% endif %}"
                                         alt="{{ post.extra.local_image }}"
                                         src="{{ get_url(path=post.extra.local_image) }}"
                                         {% if meta.width %}width="{{ meta.width }}"{% endif %}
                                         {% if meta.height %}height="{{ meta.height }}"{% endif %} />
+                                {% elif post.extra.dual_local_image %}
+                                    {% set meta_light = get_image_metadata(path=post.extra.dual_local_image.light, allow_missing=true) %}
+                                    {% set meta_dark = get_image_metadata(path=post.extra.dual_local_image.dark, allow_missing=true) %}
+                                    <img class="thumbnail-image img-light"
+                                        alt="{{ post.extra.dual_local_image.light }}"
+                                        src="{{ get_url(path=post.extra.dual_local_image.light) }}"
+                                        {% if meta_light.width %}width="{{ meta_light.width }}"{% endif %}
+                                        {% if meta_light.height %}height="{{ meta_light.height }}"{% endif %} />
+                                    <img class="thumbnail-image img-dark"
+                                        alt="{{ post.extra.dual_local_image.dark }}"
+                                        src="{{ get_url(path=post.extra.dual_local_image.dark) }}"
+                                        {% if meta_dark.width %}width="{{ meta_dark.width }}"{% endif %}
+                                        {% if meta_dark.height %}height="{{ meta_dark.height }}"{% endif %} />
                                 {% elif post.extra.remote_image %}
-                                    <img class="thumbnail-image"
+                                    <img class="thumbnail-image{% if post.extra.monochrome_image %} monochrome-image{% endif %}"
                                         alt="{{ post.extra.remote_image }}"
                                         src="{{ post.extra.remote_image }}" />
+                                {% elif post.extra.dual_remote_image %}
+                                    <img class="thumbnail-image img-light"
+                                        alt="{{ post.extra.dual_remote_image.light }}"
+                                        src="{{ post.extra.dual_remote_image.light }}" />
+                                    <img class="thumbnail-image img-dark"
+                                        alt="{{ post.extra.dual_remote_image.dark }}"
+                                        src="{{ post.extra.dual_remote_image.dark }}" />
+                                {% else %}
+                                    <div class="thumbnail-image-placeholder"></div>
                                 {% endif %}
                             </a>
                         </li>
