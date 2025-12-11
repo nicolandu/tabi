@@ -10,8 +10,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ lang }}">
     <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
         <tabi:base_url>{{ config.base_url }}</tabi:base_url>
+        <tabi:feed_title>
+        {{- config.title | striptags | safe -}}
+        {%- if term %}&#160;- {{ term.name }}
+        {%- elif section.title %} - {{ section.title }}
+        {%- endif %}&#160;
+        {{- config.extra.separator | default(value="·") }} {{
+        macros_translate::translate(key="feed_capitalised", default="Atom Feed", language_strings=language_strings) -}}
+        </tabi:feed_title>
         <tabi:separator>
-            {{ config.extra.separator | default(value="·") }}
+            {{- config.extra.separator | default(value="·") -}}
         </tabi:separator>
         <tabi:about_feeds>
             {{- macros_translate::translate(key="about_feeds", default="This is a web feed, also
@@ -38,22 +46,20 @@
         </tabi:post_listing_date>
         <tabi:current_section>
             {%- if term -%}
-            {{ term.name }}
+            {{- term.name -}}
             {%- elif section.title -%}
-            {{ section.title }}
+            {{- section.title -}}
             {%- else -%}
-            {{ config.title }}
+            {{- config.title -}}
             {%- endif -%}
         </tabi:current_section>
     </tabi:metadata>
-
-    <title>{{
-    config.title | striptags | safe }}
+    <title>{{ config.title | striptags | safe }}
         {%- if term %} - {{ term.name }}
         {%- elif section.title %} - {{ section.title }}
         {%- endif -%}
     </title>
-    {%- if config.description %} <subtitle>{{ config.description }}</subtitle> {%- endif %} <link
+    {%- if config.description -%} <subtitle>{{ config.description }}</subtitle> {%- endif %} <link
         href="{{ feed_url | safe }}" rel="self" type="application/atom+xml" />
     <link
         href="
@@ -63,8 +69,7 @@
             {{ section.permalink | escape_xml | safe }}
         {%- else -%}
             {{ get_url(path="/", lang=lang) | escape_xml | safe }}
-        {%- endif -%}
-    "
+        {%- endif -%}"
         rel="alternate" type="text/html" />
     <generator uri="https://www.getzola.org/">Zola</generator>
     {%- if last_updated -%} <updated>{{ last_updated | date(format="%+") }}</updated> {%- endif -%} <id>{{
@@ -93,10 +98,11 @@
         </author>
         <link
             rel="alternate" href="{{ page.permalink | safe }}" type="text/html" />
-        <id>{{
-    page.permalink | safe }}</id> {% if config.extra.full_content_in_feed %} <content type="html">{{
-    page.content }}</content> {% endif -%} {% if page.description -%} <summary type="html">{{
+        <id>{{page.permalink
+    | safe }}</id> {% if config.extra.full_content_in_feed %} <content type="html">{{
+            page.content }}</content> {% endif -%} {% if page.description -%} <summary type="html">{{
     page.description | markdown(inline=true) | safe }}</summary> {% elif page.summary -%} <summary
             type="html">{{ page.summary |
             striptags | trim_end_matches(pat=".") | safe }}…</summary> {% endif -%} </entry> {%-
     endfor %} </feed>
+

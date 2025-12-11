@@ -16,9 +16,8 @@
     <link rel="apple-touch-icon" type="image/png" href="{{ get_url(path='/apple-touch-icon.png', trailing_slash=false, cachebust=true) }}" />
 
     {# Feeds #}
-    {% if config.generate_feeds | default(value=config.generate_feed) %}
+    {% if config.generate_feeds %}
         {% if config.feed_filenames %}
-            {# Zola 0.19 and newer #}
             {% for feed in config.feed_filenames %}
                 {% if feed == "atom.xml" %}
                     <link rel="alternate" type="application/atom+xml" title="{{ config.title | safe }} - Atom Feed" href="{{ get_url(path=feed, trailing_slash=false) | safe }}">

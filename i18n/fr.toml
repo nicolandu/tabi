@@ -80,6 +80,7 @@ site_source = "Code du site"
 
 # Socials
 feed = "flux atom"
+feed_capitalised = "Flux Atom"
 email = "courriel"
 
 # 404 error.
