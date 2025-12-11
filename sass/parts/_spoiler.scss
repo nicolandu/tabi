@@ -7,11 +7,11 @@
     cursor: pointer; // Indicate interactive element.
 
     .spoiler-hidden {
+        filter: blur(6px);
+        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
-        filter: blur(6px);
-        user-select: none;
 
         a {
             pointer-events: none; // Make links unclickable.
@@ -27,6 +27,9 @@
     .spoiler-hidden {
         filter: none;
         user-select: auto;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
 
         a {
             pointer-events: auto; // Enable clicking on links when revealed.
