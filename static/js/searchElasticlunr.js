@@ -7,7 +7,7 @@
  * MIT Licensed
  * @license
  */
-(function () {
+(function() {
     /*!
      * elasticlunr.js
      * Copyright (C) 2017 Oliver Nightingale
@@ -67,7 +67,7 @@
      * @return {elasticlunr.Index}
      *
      */
-    const elasticlunr = function (config) {
+    const elasticlunr = function(config) {
         const idx = new elasticlunr.Index();
 
         idx.pipeline.add(
@@ -104,8 +104,8 @@
      * @param {String} message The message to be printed.
      * @memberOf Utils
      */
-    elasticlunr.utils.warn = (function (global) {
-        return function (message) {
+    elasticlunr.utils.warn = (function(global) {
+        return function(message) {
             if (global.console && console.warn) {
                 console.warn(message);
             }
@@ -123,7 +123,7 @@
      * @return {String} string representation of the passed object.
      * @memberOf Utils
      */
-    elasticlunr.utils.toString = function (obj) {
+    elasticlunr.utils.toString = function(obj) {
         if (obj === void 0 || obj === null) {
             return '';
         }
@@ -145,7 +145,7 @@
      *
      * @constructor
      */
-    elasticlunr.EventEmitter = function () {
+    elasticlunr.EventEmitter = function() {
         this.events = {};
     };
 
@@ -158,7 +158,7 @@
      * @param {Function} fn The function to call when an event is fired.
      * @memberOf EventEmitter
      */
-    elasticlunr.EventEmitter.prototype.addListener = function () {
+    elasticlunr.EventEmitter.prototype.addListener = function() {
         const args = Array.prototype.slice.call(arguments);
         const fn = args.pop();
         const names = args;
@@ -166,7 +166,7 @@
         if (typeof fn !== 'function')
             throw new TypeError('last argument must be a function');
 
-        names.forEach(function (name) {
+        names.forEach(function(name) {
             if (!this.hasHandler(name)) this.events[name] = [];
             this.events[name].push(fn);
         }, this);
@@ -179,7 +179,7 @@
      * @param {Function} fn The function to remove from an event.
      * @memberOf EventEmitter
      */
-    elasticlunr.EventEmitter.prototype.removeListener = function (name, fn) {
+    elasticlunr.EventEmitter.prototype.removeListener = function(name, fn) {
         if (!this.hasHandler(name)) return;
 
         const fnIndex = this.events[name].indexOf(fn);
@@ -199,12 +199,12 @@
      * @param {String} eventName The name of the event to emit.
      * @memberOf EventEmitter
      */
-    elasticlunr.EventEmitter.prototype.emit = function (name) {
+    elasticlunr.EventEmitter.prototype.emit = function(name) {
         if (!this.hasHandler(name)) return;
 
         const args = Array.prototype.slice.call(arguments, 1);
 
-        this.events[name].forEach(function (fn) {
+        this.events[name].forEach(function(fn) {
             fn.apply(undefined, args);
         }, this);
     };
@@ -216,7 +216,7 @@
      * @private
      * @memberOf EventEmitter
      */
-    elasticlunr.EventEmitter.prototype.hasHandler = function (name) {
+    elasticlunr.EventEmitter.prototype.hasHandler = function(name) {
         return name in this.events;
     };
     /*!
@@ -238,10 +238,10 @@
      * @see elasticlunr.tokenizer.seperator
      * @return {Array}
      */
-    elasticlunr.tokenizer = function (str) {
+    elasticlunr.tokenizer = function(str) {
         if (!arguments.length || str === null || str === undefined) return [];
         if (Array.isArray(str)) {
-            let arr = str.filter(function (token) {
+            let arr = str.filter(function(token) {
                 if (token === null || token === undefined) {
                     return false;
                 }
@@ -249,12 +249,12 @@
                 return true;
             });
 
-            arr = arr.map(function (t) {
+            arr = arr.map(function(t) {
                 return elasticlunr.utils.toString(t).toLowerCase();
             });
 
             let out = [];
-            arr.forEach(function (item) {
+            arr.forEach(function(item) {
                 const tokens = item.split(elasticlunr.tokenizer.seperator);
                 out = out.concat(tokens);
             }, this);
@@ -288,7 +288,7 @@
      *
      * @param {Object} sep The customized seperator that you want to use to tokenize a string.
      */
-    elasticlunr.tokenizer.setSeperator = function (sep) {
+    elasticlunr.tokenizer.setSeperator = function(sep) {
         if (sep !== null && sep !== undefined && typeof sep === 'object') {
             elasticlunr.tokenizer.seperator = sep;
         }
@@ -298,7 +298,7 @@
      * Reset string seperator
      *
      */
-    elasticlunr.tokenizer.resetSeperator = function () {
+    elasticlunr.tokenizer.resetSeperator = function() {
         elasticlunr.tokenizer.seperator = elasticlunr.tokenizer.defaultSeperator;
     };
 
@@ -306,7 +306,7 @@
      * Get string seperator
      *
      */
-    elasticlunr.tokenizer.getSeperator = function () {
+    elasticlunr.tokenizer.getSeperator = function() {
         return elasticlunr.tokenizer.seperator;
     };
     /*!
@@ -341,7 +341,7 @@
      *
      * @constructor
      */
-    elasticlunr.Pipeline = function () {
+    elasticlunr.Pipeline = function() {
         this._queue = [];
     };
 
@@ -360,7 +360,7 @@
      * @param {String} label The label to register this function with
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.registerFunction = function (fn, label) {
+    elasticlunr.Pipeline.registerFunction = function(fn, label) {
         if (label in elasticlunr.Pipeline.registeredFunctions) {
             elasticlunr.utils.warn(
                 'Overwriting existing registered function: ' + label
@@ -378,7 +378,7 @@
      * @return {Function}
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.getRegisteredFunction = function (label) {
+    elasticlunr.Pipeline.getRegisteredFunction = function(label) {
         if (label in elasticlunr.Pipeline.registeredFunctions !== true) {
             return null;
         }
@@ -393,7 +393,7 @@
      * @private
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
+    elasticlunr.Pipeline.warnIfFunctionNotRegistered = function(fn) {
         const isRegistered = fn.label && fn.label in this.registeredFunctions;
 
         if (!isRegistered) {
@@ -415,10 +415,10 @@
      * @return {elasticlunr.Pipeline}
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.load = function (serialised) {
+    elasticlunr.Pipeline.load = function(serialised) {
         const pipeline = new elasticlunr.Pipeline();
 
-        serialised.forEach(function (fnName) {
+        serialised.forEach(function(fnName) {
             const fn = elasticlunr.Pipeline.getRegisteredFunction(fnName);
 
             if (fn) {
@@ -439,10 +439,10 @@
      * @param {Function} functions Any number of functions to add to the pipeline.
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.add = function () {
+    elasticlunr.Pipeline.prototype.add = function() {
         const fns = Array.prototype.slice.call(arguments);
 
-        fns.forEach(function (fn) {
+        fns.forEach(function(fn) {
             elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
             this._queue.push(fn);
         }, this);
@@ -459,7 +459,7 @@
      * @param {Function} newFn The new function to add to the pipeline.
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.after = function (existingFn, newFn) {
+    elasticlunr.Pipeline.prototype.after = function(existingFn, newFn) {
         elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
 
         const pos = this._queue.indexOf(existingFn);
@@ -481,7 +481,7 @@
      * @param {Function} newFn The new function to add to the pipeline.
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.before = function (existingFn, newFn) {
+    elasticlunr.Pipeline.prototype.before = function(existingFn, newFn) {
         elasticlunr.Pipeline.warnIfFunctionNotRegistered(newFn);
 
         const pos = this._queue.indexOf(existingFn);
@@ -498,7 +498,7 @@
      * @param {Function} fn The function to remove from the pipeline.
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.remove = function (fn) {
+    elasticlunr.Pipeline.prototype.remove = function(fn) {
         const pos = this._queue.indexOf(fn);
         if (pos === -1) {
             return;
@@ -515,7 +515,7 @@
      * @return {Array}
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.run = function (tokens) {
+    elasticlunr.Pipeline.prototype.run = function(tokens) {
         const out = [];
         const tokenLength = tokens.length;
         const pipelineLength = this._queue.length;
@@ -539,7 +539,7 @@
      *
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.reset = function () {
+    elasticlunr.Pipeline.prototype.reset = function() {
         this._queue = [];
     };
 
@@ -548,7 +548,7 @@
      *
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.get = function () {
+    elasticlunr.Pipeline.prototype.get = function() {
         return this._queue;
     };
 
@@ -563,8 +563,8 @@
      * @return {Array}
      * @memberOf Pipeline
      */
-    elasticlunr.Pipeline.prototype.toJSON = function () {
-        return this._queue.map(function (fn) {
+    elasticlunr.Pipeline.prototype.toJSON = function() {
+        return this._queue.map(function(fn) {
             elasticlunr.Pipeline.warnIfFunctionNotRegistered(fn);
             return fn.label;
         });
@@ -582,7 +582,7 @@
      *
      * @constructor
      */
-    elasticlunr.Index = function () {
+    elasticlunr.Index = function() {
         this._fields = [];
         this._ref = 'id';
         this.pipeline = new elasticlunr.Pipeline();
@@ -595,7 +595,7 @@
             'add',
             'remove',
             'update',
-            function () {
+            function() {
                 this._idfCache = {};
             }.bind(this)
         );
@@ -610,7 +610,7 @@
      * @param {Function} fn The serialised set to load.
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.on = function () {
+    elasticlunr.Index.prototype.on = function() {
         const args = Array.prototype.slice.call(arguments);
         return this.eventEmitter.addListener.apply(this.eventEmitter, args);
     };
@@ -622,7 +622,7 @@
      * @param {Function} fn The serialised set to load.
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.off = function (name, fn) {
+    elasticlunr.Index.prototype.off = function(name, fn) {
         return this.eventEmitter.removeListener(name, fn);
     };
 
@@ -636,13 +636,13 @@
      * @return {elasticlunr.Index}
      * @memberOf Index
      */
-    elasticlunr.Index.load = function (serialisedData) {
+    elasticlunr.Index.load = function(serialisedData) {
         if (serialisedData.version !== elasticlunr.version) {
             elasticlunr.utils.warn(
                 'version mismatch: current ' +
-                    elasticlunr.version +
-                    ' importing ' +
-                    serialisedData.version
+                elasticlunr.version +
+                ' importing ' +
+                serialisedData.version
             );
         }
 
@@ -677,7 +677,7 @@
      * @return {elasticlunr.Index}
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.addField = function (fieldName) {
+    elasticlunr.Index.prototype.addField = function(fieldName) {
         this._fields.push(fieldName);
         this.index[fieldName] = new elasticlunr.InvertedIndex();
         return this;
@@ -696,7 +696,7 @@
      * @return {elasticlunr.Index}
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.setRef = function (refName) {
+    elasticlunr.Index.prototype.setRef = function(refName) {
         this._ref = refName;
         return this;
     };
@@ -711,7 +711,7 @@
      * @return {elasticlunr.Index}
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.saveDocument = function (save) {
+    elasticlunr.Index.prototype.saveDocument = function(save) {
         this.documentStore = new elasticlunr.DocumentStore(save);
         return this;
     };
@@ -731,19 +731,19 @@
      * @param {Boolean} emitEvent Whether or not to emit events, default true.
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.addDoc = function (doc, emitEvent) {
+    elasticlunr.Index.prototype.addDoc = function(doc, emitEvent) {
         if (!doc) return;
         var emitEvent = emitEvent === undefined ? true : emitEvent;
 
         const docRef = doc[this._ref];
 
         this.documentStore.addDoc(docRef, doc);
-        this._fields.forEach(function (field) {
+        this._fields.forEach(function(field) {
             const fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
             this.documentStore.addFieldLength(docRef, field, fieldTokens.length);
 
             const tokenCount = {};
-            fieldTokens.forEach(function (token) {
+            fieldTokens.forEach(function(token) {
                 if (token in tokenCount) tokenCount[token] += 1;
                 else tokenCount[token] = 1;
             }, this);
@@ -774,7 +774,7 @@
      * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.removeDocByRef = function (docRef, emitEvent) {
+    elasticlunr.Index.prototype.removeDocByRef = function(docRef, emitEvent) {
         if (!docRef) return;
         if (this.documentStore.isDocStored() === false) {
             return;
@@ -801,7 +801,7 @@
      * @param {Boolean} emitEvent Whether to emit remove events, defaults to true
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.removeDoc = function (doc, emitEvent) {
+    elasticlunr.Index.prototype.removeDoc = function(doc, emitEvent) {
         if (!doc) return;
 
         var emitEvent = emitEvent === undefined ? true : emitEvent;
@@ -811,9 +811,9 @@
 
         this.documentStore.removeDoc(docRef);
 
-        this._fields.forEach(function (field) {
+        this._fields.forEach(function(field) {
             const fieldTokens = this.pipeline.run(elasticlunr.tokenizer(doc[field]));
-            fieldTokens.forEach(function (token) {
+            fieldTokens.forEach(function(token) {
                 this.index[field].removeToken(token, docRef);
             }, this);
         }, this);
@@ -841,7 +841,7 @@
      * @see Index.prototype.add
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.updateDoc = function (doc, emitEvent) {
+    elasticlunr.Index.prototype.updateDoc = function(doc, emitEvent) {
         var emitEvent = emitEvent === undefined ? true : emitEvent;
 
         this.removeDocByRef(doc[this._ref], false);
@@ -859,7 +859,7 @@
      * @private
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.idf = function (term, field) {
+    elasticlunr.Index.prototype.idf = function(term, field) {
         const cacheKey = '@' + field + '/' + term;
         if (Object.prototype.hasOwnProperty.call(this._idfCache, cacheKey))
             return this._idfCache[cacheKey];
@@ -876,7 +876,7 @@
      *
      * @return {Array}
      */
-    elasticlunr.Index.prototype.getFields = function () {
+    elasticlunr.Index.prototype.getFields = function() {
         return this._fields.slice();
     };
 
@@ -905,7 +905,7 @@
      * @see Index.prototype.documentVector
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.search = function (query, userConfig) {
+    elasticlunr.Index.prototype.search = function(query, userConfig) {
         if (!query) return [];
         if (typeof query === 'string') {
             query = { any: query };
@@ -963,7 +963,7 @@
             results.push(result);
         }
 
-        results.sort(function (a, b) {
+        results.sort(function(a, b) {
             return b.score - a.score;
         });
         return results;
@@ -977,7 +977,7 @@
      * @param {elasticlunr.Configuration} config The user query config, JSON format.
      * @return {Object}
      */
-    elasticlunr.Index.prototype.fieldSearch = function (
+    elasticlunr.Index.prototype.fieldSearch = function(
         queryTokens,
         fieldName,
         config
@@ -993,7 +993,7 @@
             return;
         }
 
-        queryTokens.forEach(function (token) {
+        queryTokens.forEach(function(token) {
             let tokens = [token];
             if (expand === true) {
                 tokens = this.index[fieldName].expandToken(token);
@@ -1017,7 +1017,7 @@
             // token for efficiency (i.e., incremental intersection).
 
             const queryTokenScores = {};
-            tokens.forEach(function (key) {
+            tokens.forEach(function(key) {
                 let docs = this.index[fieldName].getDocs(key);
                 const idf = this.idf(key, fieldName);
 
@@ -1091,7 +1091,7 @@
      *
      */
 
-    elasticlunr.Index.prototype.mergeScores = function (accumScores, scores, op) {
+    elasticlunr.Index.prototype.mergeScores = function(accumScores, scores, op) {
         if (!accumScores) {
             return scores;
         }
@@ -1124,7 +1124,7 @@
      * @param {Object} docs the retrieved documents of the query token
      *
      */
-    elasticlunr.Index.prototype.fieldSearchStats = function (docTokens, token, docs) {
+    elasticlunr.Index.prototype.fieldSearchStats = function(docTokens, token, docs) {
         for (const doc in docs) {
             if (doc in docTokens) {
                 docTokens[doc].push(token);
@@ -1146,7 +1146,7 @@
      * @param {Integer} n query token number
      * @return {Object}
      */
-    elasticlunr.Index.prototype.coordNorm = function (scores, docTokens, n) {
+    elasticlunr.Index.prototype.coordNorm = function(scores, docTokens, n) {
         for (const doc in scores) {
             if (!(doc in docTokens)) continue;
             const tokens = docTokens[doc].length;
@@ -1162,9 +1162,9 @@
      * @return {Object}
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.toJSON = function () {
+    elasticlunr.Index.prototype.toJSON = function() {
         const indexJson = {};
-        this._fields.forEach(function (field) {
+        this._fields.forEach(function(field) {
             indexJson[field] = this.index[field].toJSON();
         }, this);
 
@@ -1204,7 +1204,7 @@
      * @param {Function} plugin The plugin to apply.
      * @memberOf Index
      */
-    elasticlunr.Index.prototype.use = function (plugin) {
+    elasticlunr.Index.prototype.use = function(plugin) {
         const args = Array.prototype.slice.call(arguments, 1);
         args.unshift(this);
         plugin.apply(this, args);
@@ -1228,7 +1228,7 @@
      * @constructor
      * @module
      */
-    elasticlunr.DocumentStore = function (save) {
+    elasticlunr.DocumentStore = function(save) {
         if (save === null || save === undefined) {
             this._save = true;
         } else {
@@ -1246,7 +1246,7 @@
      * @param {Object} serialisedData The serialised document store to load.
      * @return {elasticlunr.DocumentStore}
      */
-    elasticlunr.DocumentStore.load = function (serialisedData) {
+    elasticlunr.DocumentStore.load = function(serialisedData) {
         const store = new this();
 
         store.length = serialisedData.length;
@@ -1262,7 +1262,7 @@
      *
      * @return {Boolean}
      */
-    elasticlunr.DocumentStore.prototype.isDocStored = function () {
+    elasticlunr.DocumentStore.prototype.isDocStored = function() {
         return this._save;
     };
 
@@ -1275,7 +1275,7 @@
      * @param {Integer|String} docRef The key used to store the JSON format doc.
      * @param {Object} doc The JSON format doc.
      */
-    elasticlunr.DocumentStore.prototype.addDoc = function (docRef, doc) {
+    elasticlunr.DocumentStore.prototype.addDoc = function(docRef, doc) {
         if (!this.hasDoc(docRef)) this.length++;
 
         if (this._save === true) {
@@ -1295,7 +1295,7 @@
      * @return {Object}
      * @memberOf DocumentStore
      */
-    elasticlunr.DocumentStore.prototype.getDoc = function (docRef) {
+    elasticlunr.DocumentStore.prototype.getDoc = function(docRef) {
         if (this.hasDoc(docRef) === false) return null;
         return this.docs[docRef];
     };
@@ -1307,7 +1307,7 @@
      * @return {Boolean}
      * @memberOf DocumentStore
      */
-    elasticlunr.DocumentStore.prototype.hasDoc = function (docRef) {
+    elasticlunr.DocumentStore.prototype.hasDoc = function(docRef) {
         return docRef in this.docs;
     };
 
@@ -1317,7 +1317,7 @@
      * @param {Integer|String} docRef The id to remove from the document store.
      * @memberOf DocumentStore
      */
-    elasticlunr.DocumentStore.prototype.removeDoc = function (docRef) {
+    elasticlunr.DocumentStore.prototype.removeDoc = function(docRef) {
         if (!this.hasDoc(docRef)) return;
 
         delete this.docs[docRef];
@@ -1333,7 +1333,7 @@
      * @param {String} fieldName field name
      * @param {Integer} length field length
      */
-    elasticlunr.DocumentStore.prototype.addFieldLength = function (
+    elasticlunr.DocumentStore.prototype.addFieldLength = function(
         docRef,
         fieldName,
         length
@@ -1353,7 +1353,7 @@
      * @param {String} fieldName field name
      * @param {Integer} length field length
      */
-    elasticlunr.DocumentStore.prototype.updateFieldLength = function (
+    elasticlunr.DocumentStore.prototype.updateFieldLength = function(
         docRef,
         fieldName,
         length
@@ -1371,7 +1371,7 @@
      * @param {String} fieldName field name
      * @return {Integer} field length
      */
-    elasticlunr.DocumentStore.prototype.getFieldLength = function (docRef, fieldName) {
+    elasticlunr.DocumentStore.prototype.getFieldLength = function(docRef, fieldName) {
         if (docRef === null || docRef === undefined) return 0;
 
         if (!(docRef in this.docs)) return 0;
@@ -1385,7 +1385,7 @@
      * @return {Object} JSON format
      * @memberOf DocumentStore
      */
-    elasticlunr.DocumentStore.prototype.toJSON = function () {
+    elasticlunr.DocumentStore.prototype.toJSON = function() {
         return {
             docs: this.docs,
             docInfo: this.docInfo,
@@ -1427,7 +1427,7 @@
      * @return {String}
      * @see elasticlunr.Pipeline
      */
-    elasticlunr.stemmer = (function () {
+    elasticlunr.stemmer = (function() {
         const step2list = {
             ational: 'ate',
             tional: 'tion',
@@ -1655,7 +1655,7 @@
      * @return {String}
      * @see elasticlunr.Pipeline
      */
-    elasticlunr.stopWordFilter = function (token) {
+    elasticlunr.stopWordFilter = function(token) {
         if (token && elasticlunr.stopWordFilter.stopWords[token] !== true) {
             return token;
         }
@@ -1668,7 +1668,7 @@
      *
      * @return {null}
      */
-    elasticlunr.clearStopWords = function () {
+    elasticlunr.clearStopWords = function() {
         elasticlunr.stopWordFilter.stopWords = {};
     };
 
@@ -1679,10 +1679,10 @@
      * @params {Array} words customized stop words
      * @return {null}
      */
-    elasticlunr.addStopWords = function (words) {
+    elasticlunr.addStopWords = function(words) {
         if (words == null || Array.isArray(words) === false) return;
 
-        words.forEach(function (word) {
+        words.forEach(function(word) {
             elasticlunr.stopWordFilter.stopWords[word] = true;
         }, this);
     };
@@ -1693,7 +1693,7 @@
      *
      * @return {null}
      */
-    elasticlunr.resetStopWords = function () {
+    elasticlunr.resetStopWords = function() {
         elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
     };
 
@@ -1843,7 +1843,7 @@
      * @return {String}
      * @see elasticlunr.Pipeline
      */
-    elasticlunr.trimmer = function (token) {
+    elasticlunr.trimmer = function(token) {
         if (token === null || token === undefined) {
             throw new Error('token should not be undefined');
         }
@@ -1864,7 +1864,7 @@
      *
      * @constructor
      */
-    elasticlunr.InvertedIndex = function () {
+    elasticlunr.InvertedIndex = function() {
         this.root = { docs: {}, df: 0 };
     };
 
@@ -1874,7 +1874,7 @@
      * @param {Object} serialisedData The serialised inverted index to load.
      * @return {elasticlunr.InvertedIndex}
      */
-    elasticlunr.InvertedIndex.load = function (serialisedData) {
+    elasticlunr.InvertedIndex.load = function(serialisedData) {
         const idx = new this();
         idx.root = serialisedData.root;
 
@@ -1899,7 +1899,7 @@
      * is used.
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.addToken = function (token, tokenInfo, root) {
+    elasticlunr.InvertedIndex.prototype.addToken = function(token, tokenInfo, root) {
         var root = root || this.root;
         let idx = 0;
 
@@ -1930,7 +1930,7 @@
      * @return {Boolean}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.hasToken = function (token) {
+    elasticlunr.InvertedIndex.prototype.hasToken = function(token) {
         if (!token) return false;
 
         let node = this.root;
@@ -1953,7 +1953,7 @@
      * @see InvertedIndex.prototype.get
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.getNode = function (token) {
+    elasticlunr.InvertedIndex.prototype.getNode = function(token) {
         if (!token) return null;
 
         let node = this.root;
@@ -1975,7 +1975,7 @@
      * @return {Object}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.getDocs = function (token) {
+    elasticlunr.InvertedIndex.prototype.getDocs = function(token) {
         const node = this.getNode(token);
         if (node == null) {
             return {};
@@ -1994,7 +1994,7 @@
      * @return {Integer}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.getTermFrequency = function (token, docRef) {
+    elasticlunr.InvertedIndex.prototype.getTermFrequency = function(token, docRef) {
         const node = this.getNode(token);
 
         if (node == null) {
@@ -2017,7 +2017,7 @@
      * @return {Object}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.getDocFreq = function (token) {
+    elasticlunr.InvertedIndex.prototype.getDocFreq = function(token) {
         const node = this.getNode(token);
 
         if (node == null) {
@@ -2035,7 +2035,7 @@
      * @param {String} ref The ref of the document to remove from given token.
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.removeToken = function (token, ref) {
+    elasticlunr.InvertedIndex.prototype.removeToken = function(token, ref) {
         if (!token) return;
         const node = this.getNode(token);
 
@@ -2055,7 +2055,7 @@
      * @return {Array}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.expandToken = function (token, memo, root) {
+    elasticlunr.InvertedIndex.prototype.expandToken = function(token, memo, root) {
         if (token == null || token == '') return [];
         var memo = memo || [];
 
@@ -2081,7 +2081,7 @@
      * @return {Object}
      * @memberOf InvertedIndex
      */
-    elasticlunr.InvertedIndex.prototype.toJSON = function () {
+    elasticlunr.InvertedIndex.prototype.toJSON = function() {
         return {
             root: this.root,
         };
@@ -2163,7 +2163,7 @@
      * @param {Array} fields fields of index instance
      * @module
      */
-    elasticlunr.Configuration = function (config, fields) {
+    elasticlunr.Configuration = function(config, fields) {
         var config = config || '';
 
         if (fields == undefined || fields == null) {
@@ -2189,9 +2189,9 @@
      *
      * @param {Array} fields fields of index instance
      */
-    elasticlunr.Configuration.prototype.buildDefaultConfig = function (fields) {
+    elasticlunr.Configuration.prototype.buildDefaultConfig = function(fields) {
         this.reset();
-        fields.forEach(function (field) {
+        fields.forEach(function(field) {
             this.config[field] = {
                 boost: 1,
                 bool: 'OR',
@@ -2206,7 +2206,7 @@
      * @param {JSON} config User JSON configuratoin
      * @param {Array} fields fields of index instance
      */
-    elasticlunr.Configuration.prototype.buildUserConfig = function (config, fields) {
+    elasticlunr.Configuration.prototype.buildUserConfig = function(config, fields) {
         let global_bool = 'OR';
         let global_expand = false;
 
@@ -2254,12 +2254,12 @@
      * @param {String} expand Expand model
      * @param {Array} fields fields of index instance
      */
-    elasticlunr.Configuration.prototype.addAllFields2UserConfig = function (
+    elasticlunr.Configuration.prototype.addAllFields2UserConfig = function(
         bool,
         expand,
         fields
     ) {
-        fields.forEach(function (field) {
+        fields.forEach(function(field) {
             this.config[field] = {
                 boost: 1,
                 bool,
@@ -2271,14 +2271,14 @@
     /**
      * get current user configuration
      */
-    elasticlunr.Configuration.prototype.get = function () {
+    elasticlunr.Configuration.prototype.get = function() {
         return this.config;
     };
 
     /**
      * reset user search configuration.
      */
-    elasticlunr.Configuration.prototype.reset = function () {
+    elasticlunr.Configuration.prototype.reset = function() {
         this.config = {};
     };
     /**
@@ -2299,7 +2299,7 @@
      *
      * @constructor
      */
-    lunr.SortedSet = function () {
+    lunr.SortedSet = function() {
         this.length = 0;
         this.elements = [];
     };
@@ -2311,7 +2311,7 @@
      * @returns {lunr.SortedSet}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.load = function (serialisedData) {
+    lunr.SortedSet.load = function(serialisedData) {
         const set = new this();
 
         set.elements = serialisedData;
@@ -2327,7 +2327,7 @@
      * @param {Object} The objects to add to this set.
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.add = function () {
+    lunr.SortedSet.prototype.add = function() {
         let i, element;
 
         for (i = 0; i < arguments.length; i++) {
@@ -2345,7 +2345,7 @@
      * @returns {Array}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.toArray = function () {
+    lunr.SortedSet.prototype.toArray = function() {
         return this.elements.slice();
     };
 
@@ -2362,7 +2362,7 @@
      * @returns {Array}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.map = function (fn, ctx) {
+    lunr.SortedSet.prototype.map = function(fn, ctx) {
         return this.elements.map(fn, ctx);
     };
 
@@ -2377,7 +2377,7 @@
      * @memberOf SortedSet
      * for the function fn.
      */
-    lunr.SortedSet.prototype.forEach = function (fn, ctx) {
+    lunr.SortedSet.prototype.forEach = function(fn, ctx) {
         return this.elements.forEach(fn, ctx);
     };
 
@@ -2389,7 +2389,7 @@
      * @returns {Number}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.indexOf = function (elem) {
+    lunr.SortedSet.prototype.indexOf = function(elem) {
         let start = 0;
         let end = this.elements.length;
         let sectionLength = end - start;
@@ -2423,7 +2423,7 @@
      * @returns {Number}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.locationFor = function (elem) {
+    lunr.SortedSet.prototype.locationFor = function(elem) {
         let start = 0;
         let end = this.elements.length;
         let sectionLength = end - start;
@@ -2451,7 +2451,7 @@
      * @returns {lunr.SortedSet}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.intersect = function (otherSet) {
+    lunr.SortedSet.prototype.intersect = function(otherSet) {
         const intersectSet = new lunr.SortedSet();
         let i = 0;
         let j = 0;
@@ -2489,7 +2489,7 @@
      * @returns {lunr.SortedSet}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.clone = function () {
+    lunr.SortedSet.prototype.clone = function() {
         const clone = new lunr.SortedSet();
 
         clone.elements = this.toArray();
@@ -2506,7 +2506,7 @@
      * @returns {lunr.SortedSet}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.union = function (otherSet) {
+    lunr.SortedSet.prototype.union = function(otherSet) {
         let longSet, shortSet, unionSet;
 
         if (this.length >= otherSet.length) {
@@ -2534,14 +2534,14 @@
      * @returns {Array}
      * @memberOf SortedSet
      */
-    lunr.SortedSet.prototype.toJSON = function () {
+    lunr.SortedSet.prototype.toJSON = function() {
         return this.toArray();
     };
     /**
      * export the module via AMD, CommonJS or as a browser global
      * Export code from https://github.com/umdjs/umd/blob/master/returnExports.js
      */
-    (function (root, factory) {
+    (function(root, factory) {
         if (typeof define === 'function' && define.amd) {
             // AMD. Register as an anonymous module.
             define(factory);
@@ -2556,7 +2556,7 @@
             // Browser globals (root is window)
             root.elasticlunr = factory();
         }
-    })(this, function () {
+    })(this, function() {
         /**
          * Just return a value to define the module export.
          * This example returns an object, but the module
@@ -2570,7 +2570,7 @@
 // End of elasticlunr code (http://elasticlunr.com/elasticlunr.js) //
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-window.onload = function () {
+window.onload = function() {
     if (!document.body.contains(document.getElementById('searchModal'))) {
         return;
     }
@@ -2600,12 +2600,9 @@ window.onload = function () {
 
     // Replace $SHORTCUT in search icon title with actual OS-specific shortcut.
     function getShortcut() {
-        const userAgent = window.navigator.userAgent.toLowerCase();
-        if (userAgent.includes('mac')) {
-            return 'Cmd + K';
-        } else {
-            return 'Ctrl + K';
-        }
+        const navigator = window.navigator;
+        const userAgent = navigator.userAgent;
+        return /Mac/.test(navigator.platform) || /iPad/.test(userAgent) || /iPhone/.test(userAgent) ? '⌘ + K' : 'Ctrl + K';
     }
 
     function setAttributes(element, attributeNames) {
@@ -2621,7 +2618,7 @@ window.onload = function () {
     setAttributes(searchButton, ['title', 'aria-label']);
 
     // Make search button keyboard accessible.
-    searchButton.addEventListener('keydown', function (event) {
+    searchButton.addEventListener('keydown', function(event) {
         if (event.key === 'Enter' || event.key === ' ') {
             searchButton.click();
         }
@@ -2689,17 +2686,17 @@ window.onload = function () {
     searchModal.addEventListener('touchend', handleModalInteraction, { passive: true });
 
     // Close modal when pressing escape.
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             closeModal();
         }
     });
 
-    clearSearchButton.addEventListener('click', function () {
+    clearSearchButton.addEventListener('click', function() {
         clearSearch();
         searchInput.focus();
     });
-    clearSearchButton.addEventListener('keydown', function (event) {
+    clearSearchButton.addEventListener('keydown', function(event) {
         if (event.key === 'Enter' || event.key === ' ') {
             clearSearch();
             searchInput.focus();
@@ -2817,7 +2814,7 @@ window.onload = function () {
         const SNIPPET_LENGTH = 150;
         const WINDOW_SIZE = 30;
 
-        const stemmedTerms = searchTerms.map(function (term) {
+        const stemmedTerms = searchTerms.map(function(term) {
             return elasticlunr.stemmer(term.toLowerCase());
         });
 
@@ -2941,7 +2938,7 @@ window.onload = function () {
     // Handle input in the search box.
     searchInput.addEventListener(
         'input',
-        async function () {
+        async function() {
             const inputValue = this.value;
             const searchTerm = inputValue.trim();
             const searchIndex = await searchIndexPromise;
@@ -2967,7 +2964,7 @@ window.onload = function () {
 
             // Display the results.
             let resultIdCounter = 0; // Counter to generate unique IDs.
-            searchResults.forEach(function (result) {
+            searchResults.forEach(function(result) {
                 if (result.doc.title || result.doc.path || result.doc.id) {
                     const resultDiv = document.createElement('div');
                     resultDiv.setAttribute('role', 'option');
@@ -2978,15 +2975,15 @@ window.onload = function () {
                     const snippetElement = resultDiv.querySelector('span:nth-child(2)');
 
                     // Determine the text for the title.
-                    titleElement.textContent =
+                    titleElement.innerHTML =
                         result.doc.title || result.doc.path || result.doc.id;
 
                     // Determine if the body or description is available for the snippet.
                     let snippetText = result.doc.body
                         ? generateSnippet(result.doc.body, searchTerm.split(/\s+/))
                         : result.doc.description
-                        ? result.doc.description
-                        : '';
+                            ? result.doc.description
+                            : '';
                     snippetElement.innerHTML = snippetText;
 
                     // Create the hyperlink.
@@ -3011,7 +3008,7 @@ window.onload = function () {
                 updateSelection(results.firstChild);
             }
 
-            results.addEventListener('mouseover', function (event) {
+            results.addEventListener('mouseover', function(event) {
                 if (event.target.closest('div[role="option"]')) {
                     updateSelection(event.target.closest('div[role="option"]'));
                 }
@@ -3118,9 +3115,12 @@ window.onload = function () {
     }
 
     // Handle keyboard navigation.
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', function(event) {
         // Add handling for the modal open/close shortcut.
-        const isMac = navigator.userAgent.toLowerCase().includes('mac');
+        const navigator = window.navigator;
+        const userAgent = navigator.userAgent;
+        const isMac = /Mac/.test(navigator.platform) || /iPad/.test(userAgent) || /iPhone/.test(userAgent);
+
         const MODAL_SHORTCUT_KEY = 'k';
         const modalShortcutModifier = isMac ? event.metaKey : event.ctrlKey;
 
