@@ -223,18 +223,19 @@ details summary {
 
 .article-navigation {
   display: flex;
+  flex-direction: row-reverse;
   margin-block-start: 2rem;
   border-block-start: var(--divider-color) solid 0.5px;
   padding-block-start: 2rem;
 
   div:first-child {
     flex: 1;
-    text-align: start;
+    text-align: end;
   }
 
   div:last-child {
     flex: 1;
-    text-align: end;
+    text-align: start;
   }
 
   div p {
