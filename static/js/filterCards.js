@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cards.length || !filterLinks.length) return;
     allProjectsFilter.style.display = 'block';
 
+    // Pre-change all hrefs to hash format on page load
+    filterLinks.forEach(link => {
+        const originalHref = link.getAttribute('href');
+        if (originalHref) {
+            const tagSlug = originalHref.split('/').filter(Boolean).pop();
+            link.setAttribute('href', `#${tagSlug}`);
+        }
+    });
+
     // Create a Map for O(1) lookups of links by filter value.
     const linkMap = new Map(
         Array.from(filterLinks).map(link => [link.dataset.filter, link])
@@ -15,16 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
         element: card,
         tags: card.dataset.tags?.toLowerCase().split(',').filter(Boolean) ?? []
     }));
-
-    function getTagSlugFromUrl(url) {
-        return url.split('/').filter(Boolean).pop();
+    function getTagSlugFromHash(hash) {
+        return hash ? decodeURIComponent(hash.slice(1)) : '';
     }
 
     function getFilterFromHash() {
         if (!window.location.hash) return 'all';
-        const hash = decodeURIComponent(window.location.hash.slice(1));
+        const tagSlug = getTagSlugFromHash(window.location.hash);
         const matchingLink = Array.from(filterLinks).find(link =>
-            getTagSlugFromUrl(link.getAttribute('href')) === hash
+            link.getAttribute('href') === `#${tagSlug}`
         );
         return matchingLink?.dataset.filter ?? 'all';
     }
@@ -36,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const activeLink = linkMap.get(filterValue);
                 if (activeLink) {
-                    const tagSlug = getTagSlugFromUrl(activeLink.getAttribute('href'));
-                    history.pushState(null, '', `#${tagSlug}`);
+                    const hash = activeLink.getAttribute('href');
+                    history.pushState(null, '', hash);
                 }
             }
         }
@@ -97,3 +105,4 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveFilter(initialFilter, false);
     }
 });
+
