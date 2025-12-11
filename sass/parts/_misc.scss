@@ -148,6 +148,10 @@ hr {
   height: 1px;
 }
 
+.footnotes {
+  padding-block-start: var(--paragraph-spacing);
+}
+
 .footnotes-list,
 .footnotes {
   text-align: start;
