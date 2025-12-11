@@ -29,6 +29,6 @@
     >
 {% endif %}
 
-<script src="{{ get_url(path='js/' ~ comment_system ~ '.min.js', trailing_slash=false) | safe }}" async></script>
+<script src="{{ get_url(path='js/' ~ comment_system ~ '.min.js', trailing_slash=false, cachebust=true) | safe }}" async></script>
 <noscript>{{ macros_translate::translate(key="comments_noscript", default="JavaScript is required to view the comments.", language_strings=language_strings) }}</noscript>
 </div>

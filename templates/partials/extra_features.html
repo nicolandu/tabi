@@ -44,8 +44,8 @@
 
 {# Add KaTeX functionality #}
 {%- if macros_settings::evaluate_setting_priority(setting="katex", page=page_s, section=section_s, default_global_value=false) == "true" -%}
-    <link rel="stylesheet" href="{{ get_url(path='katex.min.css', trailing_slash=false) | safe }}">
-    <script defer src="{{ get_url(path='js/katex.min.js', trailing_slash=false) | safe }}"></script>
+    <link rel="stylesheet" href="{{ get_url(path='katex.min.css', trailing_slash=false, cachebust=true) | safe }}">
+    <script defer src="{{ get_url(path='js/katex.min.js', trailing_slash=false, cachebust=true) | safe }}"></script>
 {%- endif -%}
 
 {# Add copy button to code blocks #}
@@ -57,15 +57,15 @@
     <span id="copy-init" class="hidden">
         {{- macros_translate::translate(key="copy_code_to_clipboard", default="Copy code to clipboard", language_strings=language_strings) -}}
     </span>
-    <script defer src="{{ get_url(path='js/copyCodeToClipboard.min.js', trailing_slash=false) | safe }}"></script>
+    <script defer src="{{ get_url(path='js/copyCodeToClipboard.min.js', trailing_slash=false, cachebust=true) | safe }}"></script>
 {%- endif -%}
 
 {# Add backlinks to footnotes #}
 {%- if macros_settings::evaluate_setting_priority(setting="footnote_backlinks", page=page_s, section=section_s, default_global_value=false) == "true" -%}
-    <script defer src="{{ get_url(path='js/footnoteBacklinks.min.js', trailing_slash=false) | safe }}"></script>
+    <script defer src="{{ get_url(path='js/footnoteBacklinks.min.js', trailing_slash=false, cachebust=true) | safe }}"></script>
 {%- endif -%}
 
 {# Add iine.js for the like button #}
 {%- if macros_settings::evaluate_setting_priority(setting="iine", page=page_s, section=section_s, default_global_value=false) == "true" -%}
-    <script defer src="{{ get_url(path='js/iine.min.js', trailing_slash=false) | safe }}"></script>
+    <script defer src="{{ get_url(path='js/iine.min.js', trailing_slash=false, cachebust=true) | safe }}"></script>
 {%- endif -%}

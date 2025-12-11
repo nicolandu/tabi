@@ -11,9 +11,9 @@
     {# Site title #}
     <title>{%- include "partials/title.html" -%}</title>
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="{{ get_url(path='/favicon.png', trailing_slash=false, cachebust=true) }}" />
     <link rel="icon" id="favicon-svg" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" type="image/png" href="{{ get_url(path='/apple-touch-icon.png', trailing_slash=false, cachebust=true) }}" />
 
     {# Feeds #}
     {% if config.generate_feeds | default(value=config.generate_feed) %}
@@ -28,10 +28,6 @@
                     <link rel="alternate" href="{{ get_url(path=feed, trailing_slash=false) | safe }}">
                 {% endif %}
             {% endfor %}
-        {% else %}
-            {# Older Zola versions #}
-            {% set feed_url = config.feed_filename | default(value="atom.xml") %}
-            <link rel="alternate" type="application/atom+xml" title="{{ config.title | safe }}" href="{{ get_url(path=feed_url, trailing_slash=false) | safe }}">
         {% endif %}
     {% endif %}
 
@@ -122,9 +118,9 @@
 
     {%- if config.extra.theme_switcher and config.extra.theme_switcher == true -%}
         {# If JavaScript is disabled, hide the button. #}
-        <noscript><link rel="stylesheet" href="{{ get_url(path='no-js.css') | safe }}"/></noscript>
-        <script type="text/javascript" src="{{ get_url(path='js/initializeTheme.min.js') | safe }}"></script>
-        <script defer src="{{ get_url(path='js/themeSwitcher.min.js', trailing_slash=false) | safe }}"></script>
+        <noscript><link rel="stylesheet" href="{{ get_url(path='no-js.css', trailing_slash=false, cachebust=true) }}"/></noscript>
+        <script type="text/javascript" src="{{ get_url(path='js/initializeTheme.min.js', trailing_slash=false, cachebust=true) }}"></script>
+        <script defer src="{{ get_url(path='js/themeSwitcher.min.js', trailing_slash=false, cachebust=true) }}"></script>
     {%- endif -%}
 
     {%- if config.extra.analytics.service -%}
@@ -149,16 +145,16 @@
         {%- endif -%}
 
         {%- if search_index_format == "elasticlunr_javascript" -%}
-            <script defer src="{{ get_url(path='search_index.' ~ lang ~ '.js', cachebust=true) | safe }}"></script>
+            <script defer src="{{ get_url(path='search_index.' ~ lang ~ '.js', trailing_slash=false, cachebust=true) }}"></script>
         {%- endif -%}
 
         {# Main search script #}
-        <script defer src="{{ get_url(path='js/searchElasticlunr.min.js', cachebust=true) | safe }}"></script>
+        <script defer src="{{ get_url(path='js/searchElasticlunr.min.js', cachebust=true) }}"></script>
 
         {# Support correct stemming and stop word filtering in non-English search #}
         {%- if lang != "en" -%}
-            <script defer src="{{ get_url(path='js/lunr/lunrStemmerSupport.min.js') | safe }}"></script>
-            <script defer src="{{ get_url(path='js/lunr/lunr.' ~ lang ~ '.min.js') | safe }}"></script>
+            <script defer src="{{ get_url(path='js/lunr/lunrStemmerSupport.min.js', trailing_slash=false, cachebust=true) }}"></script>
+            <script defer src="{{ get_url(path='js/lunr/lunr.' ~ lang ~ '.min.js', trailing_slash=false, cachebust=true) }}"></script>
         {%- endif -%}
     {%- endif -%}
 

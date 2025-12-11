@@ -101,7 +101,7 @@
                                     {% set meta = get_image_metadata(path=post.extra.local_image, allow_missing=true) %}
                                     <img class="thumbnail-image{% if post.extra.monochrome_image %} monochrome-image{% endif %}"
                                         alt="{{ post.extra.local_image }}"
-                                        src="{{ get_url(path=post.extra.local_image) }}"
+                                        src="{{ get_url(path=post.extra.local_image, trailing_slash=false, cachebust=true) }}"
                                         {% if meta.width %}width="{{ meta.width }}"{% endif %}
                                         {% if meta.height %}height="{{ meta.height }}"{% endif %} />
                                 {% elif post.extra.dual_local_image %}
@@ -109,12 +109,12 @@
                                     {% set meta_dark = get_image_metadata(path=post.extra.dual_local_image.dark, allow_missing=true) %}
                                     <img class="thumbnail-image img-light"
                                         alt="{{ post.extra.dual_local_image.light }}"
-                                        src="{{ get_url(path=post.extra.dual_local_image.light) }}"
+                                        src="{{ get_url(path=post.extra.dual_local_image.light, trailing_slash=false, cachebust=true) }}"
                                         {% if meta_light.width %}width="{{ meta_light.width }}"{% endif %}
                                         {% if meta_light.height %}height="{{ meta_light.height }}"{% endif %} />
                                     <img class="thumbnail-image img-dark"
                                         alt="{{ post.extra.dual_local_image.dark }}"
-                                        src="{{ get_url(path=post.extra.dual_local_image.dark) }}"
+                                        src="{{ get_url(path=post.extra.dual_local_image.dark, trailing_slash=false, cachebust=true) }}"
                                         {% if meta_dark.width %}width="{{ meta_dark.width }}"{% endif %}
                                         {% if meta_dark.height %}height="{{ meta_dark.height }}"{% endif %} />
                                 {% elif post.extra.remote_image %}

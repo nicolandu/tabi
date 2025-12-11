@@ -22,7 +22,7 @@
                 {% set meta = get_image_metadata(path=page.extra.local_image, allow_missing=true) %}
                 <img class="card-image{% if page.extra.monochrome_image %} monochrome-image{% elif page.extra.hover_invert_image %} card-hover-invertible-image{% endif %}"
                     alt="{{ page.extra.local_image }}"
-                    src="{{ get_url(path=page.extra.local_image) }}"
+                    src="{{ get_url(path=page.extra.local_image, trailing_slash=false, cachebust=true) }}"
                     {% if meta.width %}width="{{ meta.width }}"{% endif %}
                     {% if meta.height %}height="{{ meta.height }}"{% endif %} />
             {% elif page.extra.dual_local_image %}
@@ -30,12 +30,12 @@
                 {% set meta_dark = get_image_metadata(path=page.extra.dual_local_image.dark, allow_missing=true) %}
                 <img class="card-image img-light{% if page.extra.hover_invert_image %} card-hover-invertible-image{% endif %}"
                     alt="{{ page.extra.dual_local_image.light }}"
-                    src="{{ get_url(path=page.extra.dual_local_image.light) }}"
+                    src="{{ get_url(path=page.extra.dual_local_image.light, trailing_slash=false, cachebust=true) }}"
                     {% if meta_light.width %}width="{{ meta_light.width }}"{% endif %}
                     {% if meta_light.height %}height="{{ meta_light.height }}"{% endif %} />
                 <img class="card-image img-dark{% if page.extra.hover_invert_image %} card-hover-invertible-image{% endif %}"
                     alt="{{ page.extra.dual_local_image.dark }}"
-                    src="{{ get_url(path=page.extra.dual_local_image.dark) }}"
+                    src="{{ get_url(path=page.extra.dual_local_image.dark, trailing_slash=false, cachebust=true) }}"
                     {% if meta_dark.width %}width="{{ meta_dark.width }}"{% endif %}
                     {% if meta_dark.height %}height="{{ meta_dark.height }}"{% endif %} />
             {% elif page.extra.remote_image %}

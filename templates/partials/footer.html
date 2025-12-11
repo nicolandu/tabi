@@ -29,7 +29,7 @@ This variable will hold all the text strings for the language #}
                     {%- if should_show_feed -%}
                     <li>
                         <a class="nav-links no-hover-padding social social-rss" title="{{ feed_label }}" rel="{{ rel_attributes }}" {{ blank_target }} href="{{ get_url(path=feed_url, lang=lang, trailing_slash=false) | safe }}">
-                            <img loading="lazy" alt="{{ feed_label }}" src="{{ get_url(path='/social-icons/rss.svg') }}" />
+                            <img loading="lazy" alt="{{ feed_label }}" src="{{ get_url(path='/social-icons/rss.svg', trailing_slash=false, cachebust=true) }}" />
                         </a>
                     </li>
                     {%- endif -%}
@@ -39,7 +39,7 @@ This variable will hold all the text strings for the language #}
                         {#- Cloudflare needs js to decode email -#}
                         <li class="js">
                             <a class="nav-links no-hover-padding social social-email" title="{{ email_label }}" href="mailto:{{ config.extra.email | safe }}">
-                                <img loading="lazy" alt="{{ email_label }}" src="{{ get_url(path='/social-icons/email.svg') }}" />
+                                <img loading="lazy" alt="{{ email_label }}" src="{{ get_url(path='/social-icons/email.svg', trailing_slash=false, cachebust=true) }}" />
                             </a>
                         </li>
                     {%- endif -%}
@@ -48,7 +48,7 @@ This variable will hold all the text strings for the language #}
                         {% for social in config.extra.socials %}
                             <li>
                                 <a class="nav-links no-hover-padding social social-{{ social.icon }}" title="{{ social.name }}" rel="{{ rel_attributes }} me" {{ blank_target }} href="{{ social.url | safe }}">
-                                    <img loading="lazy" alt="{{ social.name }}" src="{{ get_url(path='/social-icons/' ~ social.icon ~ '.svg') }}" />
+                                    <img loading="lazy" alt="{{ social.name }}" src="{{ get_url(path='/social-icons/' ~ social.icon ~ '.svg', trailing_slash=false, cachebust=true) }}" />
                                 </a>
                             </li>
                         {% endfor %}

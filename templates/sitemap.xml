@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="{{ get_url(path='/sitemap-style.xsl', trailing_slash=false) | safe }}" type="text/xsl"?>
+<?xml-stylesheet href="{{ get_url(path='/sitemap-style.xsl', trailing_slash=false, cachebust=true) }}" type="text/xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {%- for sitemap_entry in entries %}
     <url>
