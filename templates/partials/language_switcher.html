@@ -25,17 +25,38 @@
                 {#- Use the loaded language strings to get the language name -#}
                 {% set language_name = macros_translate::translate(key="language_name", default=lcode,
                 language_strings=other_language_strings) %}
+
+                {%- set_global url = current_url | default(value="/") -%}
+                {%- set_global path = current_path | default(value="/") -%}
+
+                {#- Translate slug -#}
+                {%- if term.slug and config.extra.tag_translations -%}
+                    {%- for trans in config.extra.tag_translations -%}
+                        {%- if trans[lang] == term.slug -%}
+                            {%- if url -%}
+                                {%- set_global url = url | trim_end_matches(pat='/' ~ term.slug ~ '/') -%}
+                                {%- set_global url = url ~ '/' ~ trans[lcode] ~ '/' -%}
+                            {%- endif -%}
+                            {%- if path -%}
+                                {%- set_global path = path | trim_end_matches(pat='/' ~ term.slug ~ '/') -%}
+                                {%- set_global path = path ~ '/' ~ trans[lcode] ~ '/' -%}
+                            {%- endif -%}
+                            {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- endif -%}
+
                 {#- Check if the language code matches the default language -#}
                 {%- if lcode == config.default_language -%}
                     {#- If it does, link to the root path (no language code in URL) -#}
-                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ current_url | replace(from='/' ~ lang ~ '/', to = '/') }}">{{ language_name }}</a>
+                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ url | replace(from='/' ~ lang ~ '/', to = '/') }}">{{ language_name }}</a>
                     {#- Check if the current language is the default language -#}
                     {#- If it is, append the language code to the base URL -#}
                 {%- elif lang == config.default_language -%}
-                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ config.base_url }}/{{ lcode }}{{ current_path | default(value="/") | safe }}">{{ language_name }}</a>
+                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ config.base_url }}/{{ lcode }}{{ path | safe }}">{{ language_name }}</a>
                 {%- else -%}
                     {#- If it's not, replace the current language code in the URL with the new one -#}
-                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ current_url | replace(from='/' ~ lang ~ '/', to='/' ~ lcode ~ '/') }}">{{ language_name }}</a>
+                    <a role="menuitem" lang="{{ lcode }}" aria-label="{{ language_name }}" href="{{ url | replace(from='/' ~ lang ~ '/', to='/' ~ lcode ~ '/') }}">{{ language_name }}</a>
                 {%- endif -%}
             {%- endfor -%}
         </div>
