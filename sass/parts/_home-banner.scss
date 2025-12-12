@@ -1,4 +1,4 @@
-#banner-container-home {
+.banner-container-home {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -10,7 +10,7 @@
         margin-block-end: 2rem;
     }
 
-    #home-banner-text {
+    .home-banner-text {
         flex: 1;
         margin-block-end: 1.5rem;
         color: var(--primary-color);
@@ -21,7 +21,7 @@
             font-size: 1rem;
         }
 
-        #home-banner-header {
+        .home-banner-header {
             margin: 0;
             margin-block-end: 1rem;
             font-weight: 550;
@@ -33,7 +33,7 @@
             }
         }
 
-        #banner-home-subtitle {
+        .banner-home-subtitle {
             color: var(--text-color);
             font-weight: 250;
             line-height: 1.75rem;
@@ -52,7 +52,7 @@
         }
     }
 
-    #image-container-home {
+    .image-container-home {
         position: relative;
         margin: auto 0;
         padding-inline-start: 2rem;
@@ -60,7 +60,7 @@
         overflow: hidden;
         text-align: center;
 
-        #banner-home-img {
+        .banner-home-img {
             border: none;
             aspect-ratio: 1 / 1;
             width: 100%;

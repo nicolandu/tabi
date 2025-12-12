@@ -37,18 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return matchingLink?.dataset.filter ?? 'all';
     }
 
-    function setActiveFilter(filterValue, updateHash = true) {
-        if (updateHash) {
-            if (filterValue === 'all') {
-                history.pushState(null, '', window.location.pathname);
-            } else {
-                const activeLink = linkMap.get(filterValue);
-                if (activeLink) {
-                    const hash = activeLink.getAttribute('href');
-                    history.pushState(null, '', hash);
-                }
-            }
-        }
+    function setActiveFilter(filterValue) {
         const isAll = filterValue === 'all';
         const display = isAll ? '' : 'none';
         const ariaHidden = isAll ? 'false' : 'true';

@@ -1,8 +1,8 @@
 {%- set header = section.extra.header-%}
-<div id="banner-container-home">
-    <div id="home-banner-text">
-        <h1 id="home-banner-header">{{ header.title }}</h1>
-        <section id="banner-home-subtitle">
+<div class="banner-container-home">
+    <div class="home-banner-text">
+        <h1 class="home-banner-header">{{ header.title }}</h1>
+        <section class="banner-home-subtitle">
             {{ section.content | safe }}
         </section>
     </div>
@@ -13,8 +13,8 @@
         {%- else -%}
             {%- set image_path = get_url(path=header.img, trailing_slash=false, cachebust=true) | safe -%}
         {%- endif -%}
-        <div id="image-container-home">
-            <img alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path }}" />
+        <div class="image-container-home">
+            <img class="banner-home-img" alt="{{ header.img_alt | default(value="the owner") }}" src="{{ image_path }}" />
         </div>
     {%- elif header.dual_img -%}
         {%- if header.dual_img.light is containing("$BASE_URL") or header.dual_img.dark is containing("$BASE_URL") -%}
@@ -24,9 +24,9 @@
             {%- set image_path_light = get_url(path=header.dual_img.light, trailing_slash=false, cachebust=true) | safe -%}
             {%- set image_path_dark = get_url(path=header.dual_img.dark, trailing_slash=false, cachebust=true) | safe -%}
         {%- endif -%}
-        <div id="image-container-home">
-            <img class="img-light" alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path_light }}" />
-            <img class="img-dark" alt="{{ header.img_alt | default(value="the owner") }}" id="banner-home-img" src="{{ image_path_dark }}" />
+        <div class="image-container-home">
+            <img class="img-light banner-home-img" alt="{{ header.img_alt | default(value="the owner") }}" src="{{ image_path_light }}" />
+            <img class="img-dark banner-home-img" alt="{{ header.img_alt | default(value="the owner") }}" src="{{ image_path_dark }}" />
         </div>
     {%- endif -%}
 </div>
