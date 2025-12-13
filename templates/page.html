@@ -249,7 +249,10 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
                 '<span class="z-keyword z-other z-rust">use</span>', '<span class="z-keyword z-control z-import z-rust">use</span>',
                 '<span class="z-storage z-type z-ts">let</span>', '<span class="z-keyword z-other z-ts">let</span>',
                 '<span class="z-storage z-type z-ts">const</span>', '<span class="z-keyword z-other z-ts">const</span>',
+                '">↩</a>', '"><span class="arrow">&uarr;</span></a>',
             ] -%}
+            {#- Footnotes -#}
+
             {%- for patch in syntax_patches -%}
                 {#- Replace even indices (0-based) with odd indices (can't seem to do double arrays...) -#}
                 {%- if loop.index % 2 == 1 -%} {#- 1-based, here only -#}

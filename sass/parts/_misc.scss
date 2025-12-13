@@ -259,6 +259,10 @@ details summary {
   }
 }
 
+.arrow {
+  font-family: var(--sans-serif-font);
+}
+
 :dir(rtl) .arrow {
   display: inline-block;
   transform: scaleX(-1);
