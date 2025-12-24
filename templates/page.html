@@ -242,8 +242,11 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
             {#- Replace series_intro placeholder -#}
             {%- set content_with_intro = page.content -%}
 
+            {#- Add word joiner to prevent line breaks before en- and em-dashes. -#}
             {#- FIXME: This is just a workaround until Zola changes its syntax highlighter. -#}
             {%- set syntax_patches = [
+                '–', '&#8288;&ndash;',
+                '—', '&#8288;&mdash;',
                 '<span class="z-storage z-type z-rust">let</span>', '<span class="z-keyword z-other z-rust">let</span>',
                 '<span class="z-storage z-type z-rust">const</span>', '<span class="z-keyword z-other z-rust">const</span>',
                 '<span class="z-keyword z-other z-rust">use</span>', '<span class="z-keyword z-control z-import z-rust">use</span>',
@@ -370,3 +373,4 @@ Current section extra: {% if current_section %}{{ current_section.extra | json_e
 {%- include "partials/extra_features.html" -%}
 
 {% endblock main_content %}
+

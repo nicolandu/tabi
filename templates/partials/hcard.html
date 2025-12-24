@@ -49,7 +49,7 @@
     {%- if hcard.with_social_links and config.extra.socials %}
       {% for social in config.extra.socials %}
       <span>
-        <a class="p-url" rel="me" href="{{ social.url | safe }}">{{ social.name }}</a>
+        <a class="p-url" rel="{{ macros_rel_attributes::rel_attributes() }} me" href="{{ social.url | safe }}">{{ social.name }}</a>
       </span> -
       {% endfor %}
     {% endif %}
