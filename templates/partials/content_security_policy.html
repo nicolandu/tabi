@@ -35,7 +35,7 @@ content="default-src 'self'
     {%- endif -%}
 
     {%- if giscus_enabled -%}
-        {%- set script_src = script_src ~ " " ~ " giscus.app" -%}
+        {%- set script_src = script_src ~ " giscus.app" -%}
     {%- endif -%}
 
     {#- Check if a webmention system is enabled to allow the necessary domains and directives -#}
@@ -55,14 +55,18 @@ content="default-src 'self'
 
     {%- for domain in config.extra.allowed_domains -%}
         {%- if domain.directive == "connect-src" -%}
+            {#- Deduplicate 'self', since it's set here by default -#}
             {%- set configured_connect_src = domain.domains | join(sep=' ') | safe -%}
-            {%- set_global connect_src = connect_src ~ " " ~ configured_connect_src  -%}
+            {%- set configured_connect_src = configured_connect_src ~ " " | replace(from="'self' ", to="") | safe -%}
+            {%- set_global connect_src = connect_src ~ configured_connect_src -%}
             {%- continue -%}
         {%- endif -%}
 
         {%- if domain.directive == "script-src" -%}
+            {#- Deduplicate 'self', since it's set here by default -#}
             {%- set configured_script_src = domain.domains | join(sep=' ') | safe -%}
-            {%- set_global script_src = script_src ~ " " ~ configured_script_src  -%}
+            {%- set configured_script_src = configured_script_src ~ " " | replace(from="'self' ", to="") | safe -%}
+            {%- set_global script_src = script_src ~ configured_script_src -%}
             {%- continue -%}
         {%- endif -%}
 

@@ -1,9 +1,11 @@
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
 
     {%- if macros_settings::evaluate_setting_priority(setting="enable_csp", page=page | default(value=""), section=section | default(value=""), default_global_value="true") == "true" -%}
         {%- include "partials/content_security_policy.html" -%}
     {%- endif -%}
+    
+    {%- set feed_url = feed_utils::get_feed_url() -%}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base" content="{{ config.base_url | safe }}">
@@ -17,17 +19,8 @@
 
     {# Feeds #}
     {% if config.generate_feeds %}
-        {% if config.feed_filenames %}
-            {% for feed in config.feed_filenames %}
-                {% if feed == "atom.xml" %}
-                    <link rel="alternate" type="application/atom+xml" title="{{ config.title | safe }} - Atom Feed" href="{{ get_url(path=feed, trailing_slash=false) | safe }}">
-                {% elif feed == "rss.xml" %}
-                    <link rel="alternate" type="application/rss+xml" title="{{ config.title | safe }} - RSS Feed" href="{{ get_url(path=feed, trailing_slash=false) | safe }}">
-                {% else %}
-                    <link rel="alternate" href="{{ get_url(path=feed, trailing_slash=false) | safe }}">
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        <link rel="alternate" type="application/atom+xml" title="{{- config.title | striptags | safe -}}&nbsp;{{- config.extra.separator | default(value="·") }} {{
+macros_translate::translate(key="feed_capitalised", default="Atom Feed", language_strings=language_strings) -}}" href="{{ get_url(path=feed_url, trailing_slash=false) | safe }}">
     {% endif %}
 
     {# Define array of CSS files to load. main.css is always loaded. #}
