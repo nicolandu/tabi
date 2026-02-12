@@ -3,9 +3,9 @@
 # Comme condition d'accès à ce site web, vous acceptez de respecter les signaux
 # de contenu suivants:
 
-# (a)  Si un signal de contenu = `yes`, vous pouvez collecter du contenu pour
+# (a)  Si un signal de contenu (Content-Signal) = `yes`, vous pouvez collecter du contenu pour
 #      l'usage correspondant.
-# (b)  Si un signal de contenu = `no`, vous ne pouvez pas collecter de contenu
+# (b)  Si un signal de contenu (Content-Signal) = `no`, vous ne pouvez pas collecter de contenu
 #      pour l'usage correspondant.
 
 # Les signaux de contenu et leurs significations sont les suivants:
@@ -30,9 +30,9 @@
 # As a condition of accessing this website, you agree to abide by the
 # following content signals:
 
-# (a)  If a content-signal = `yes`, you may collect content for the
+# (a)  If a Content-Signal = `yes`, you may collect content for the
 #      corresponding use.
-# (b)  If a content-signal = `no`, you may not collect content for the
+# (b)  If a Content-Signal = `no`, you may not collect content for the
 #      corresponding use.
 
 # The content signals and their meanings are:
@@ -52,31 +52,50 @@
 # MARKET.
 
 User-Agent: *
-Content-signal: search=yes, ai-input=no, ai-train=no
+Content-Signal: search=yes, ai-input=no, ai-train=no
 Allow: /
+Disallow: /cdn-cgi/
 
-User-agent: Amazonbot
+User-Agent: Amazonbot
 Disallow: /
 
-User-agent: Applebot-Extended
+User-Agent: Applebot-Extended
 Disallow: /
 
-User-agent: Bytespider
+User-Agent: Bytespider
 Disallow: /
 
-User-agent: CCBot
+User-Agent: CCBot
 Disallow: /
 
-User-agent: ClaudeBot
+User-Agent: ChatGPT-User
 Disallow: /
 
-User-agent: Google-Extended
+User-Agent: ClaudeBot
 Disallow: /
 
-User-agent: GPTBot
+User-Agent: Claude-User
 Disallow: /
 
-User-agent: meta-externalagent
+User-Agent: Claude-SearchBot
+Disallow: /
+
+User-Agent: Google-Extended
+Disallow: /
+
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: Meta-ExternalAds
+Disallow: /
+
+User-Agent: Meta-ExternalAgent
+Disallow: /
+
+User-Agent: Meta-WebIndexer
+Disallow: /
+
+User-Agent: OAI-SearchBot
 Disallow: /
 
 Sitemap: {{ get_url(path="sitemap.xml") }}
