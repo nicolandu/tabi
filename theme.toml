@@ -25,14 +25,6 @@ homepage = "https://osc.garden"
 # Translations for tag linking between languages.
 tag_translations = [{ fr = "cartes", en = "maps" }]
 
-# Enable JavaScript theme toggler to allow users to switch between dark/light mode.
-# If disabled, your site will use the theme specified in the `default_theme` variable.
-theme_switcher = true
-
-# This setting determines the default theme on load ("light" or "dark").
-# To follow the user's OS theme, leave it empty or unset.
-default_theme = ""
-
 # Set browser theme colour. Can be a single colour or [light, dark].
 # Note: Bright colors may be ignored in dark mode.
 # More details: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color

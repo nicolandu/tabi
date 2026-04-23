@@ -11,12 +11,13 @@
     <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
         <tabi:base_url>{{ config.base_url }}</tabi:base_url>
         <tabi:feed_title>
-        {{- config.title | striptags | safe -}}
-        {%- if term %}&#160;- {{ term.name }}
-        {%- elif section.title %} - {{ section.title }}
-        {%- endif %}&#160;
-        {{- config.extra.separator | default(value="·") }} {{
-        macros_translate::translate(key="feed_capitalised", default="Atom Feed", language_strings=language_strings) -}}
+            {{- config.title | striptags | safe -}}
+            {%- if term %}&#160;- {{ term.name }}
+            {%- elif section.title %} - {{ section.title }}
+            {%- endif %}&#160;
+            {{- config.extra.separator | default(value="·") }} {{
+    macros_translate::translate(key="feed_capitalised", default="Atom Feed",
+    language_strings=language_strings) -}}
         </tabi:feed_title>
         <tabi:separator>
             {{- config.extra.separator | default(value="·") -}}
@@ -38,9 +39,6 @@
             {{- macros_translate::translate(key="last_updated_on", default="Updated on $DATE",
     language_strings=language_strings) -}}
         </tabi:last_updated_on>
-        <tabi:default_theme>
-            {{- config.extra.default_theme | default(value="") -}}
-        </tabi:default_theme>
         <tabi:post_listing_date>
             {{- config.extra.post_listing_date | default(value="date") -}}
         </tabi:post_listing_date>
@@ -54,7 +52,8 @@
             {%- endif -%}
         </tabi:current_section>
     </tabi:metadata>
-    <title>{{ config.title | striptags | safe }}
+    <title>{{
+    config.title | striptags | safe }}
         {%- if term %} - {{ term.name }}
         {%- elif section.title %} - {{ section.title }}
         {%- endif -%}

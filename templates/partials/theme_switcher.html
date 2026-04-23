@@ -16,16 +16,4 @@
         aria-label="{{ aria_label }}"
         aria-pressed="false">
     </div>
-
-    {%- set reset_str = macros_translate::translate(key='reset_mode', default='Reset mode to default', language_strings=language_strings) -%}
-
-    <div
-        title="{{ reset_str }}"
-        class="theme-resetter arrow"
-        tabindex="0"
-        role="button"
-        aria-hidden="true"
-        aria-label="{{ reset_str }}">
-    </div>
-
 </li>

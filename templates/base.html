@@ -25,9 +25,7 @@ This variable will hold all the text strings for the language #}
 {%- endif -%}
 
 <!DOCTYPE html>
-<html lang="{{ lang }}" {% if config.extra.default_theme -%}
-    data-theme="{{config.extra.default_theme}}"
-{%- endif -%}{% if macros_settings::evaluate_setting_priority(setting="force_codeblock_ltr", page=current_page, default_global_value=true) == "false" -%}
+<html lang="{{ lang }}"{% if macros_settings::evaluate_setting_priority(setting="force_codeblock_ltr", page=current_page, default_global_value=true) == "false" -%}
     data-code-direction="inherit"{% endif %}>
 
 {% include "partials/header.html" %}
@@ -36,10 +34,13 @@ This variable will hold all the text strings for the language #}
     <a href="#main-content" id="skip-link">{{ macros_translate::translate(key="skip_to_content", default="Skip to content", language_strings=language_strings) }}</a>
     {% include "partials/nav.html" %}
     <div class="content" id="main-content">
-
         {# Post page is the default #}
         {% block main_content %}
             Nothing here?!
+
+            Rien ici?!
+
+            ¡¿Nada aquí?!
         {% endblock main_content %}
     </div>
     {% include "partials/footer.html" %}

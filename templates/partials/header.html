@@ -41,7 +41,7 @@ macros_translate::translate(key="feed_capitalised", default="Atom Feed", languag
         <link rel="stylesheet" href="{{ get_url(path=stylesheet, cachebust=true) | safe }}" />
     {%- endfor %}
 
-    <meta name="color-scheme" content="{%- if config.extra.theme_switcher -%}light dark{%- elif config.extra.default_theme -%}{{config.extra.default_theme}}{%- else -%}light{%- endif -%}" />
+    <meta name="color-scheme" content="light dark" />
 
     {%- if config.extra.browser_theme_color and config.extra.browser_theme_color is iterable -%}
         {# Handle array values: theme_color[0] for light mode, theme_color[1] for dark mode #}
@@ -108,12 +108,9 @@ macros_translate::translate(key="feed_capitalised", default="Atom Feed", languag
 
     <meta property="og:site_name" content="{{ config.title }}">
 
-    {%- if config.extra.theme_switcher and config.extra.theme_switcher == true -%}
-        {# If JavaScript is disabled, hide the button. #}
-        <noscript><link rel="stylesheet" href="{{ get_url(path='no-js.css', trailing_slash=false, cachebust=true) }}"/></noscript>
-        <script type="text/javascript" src="{{ get_url(path='js/initializeTheme.min.js', trailing_slash=false, cachebust=true) }}"></script>
-        <script defer src="{{ get_url(path='js/themeSwitcher.min.js', trailing_slash=false, cachebust=true) }}"></script>
-    {%- endif -%}
+    {# If JavaScript is disabled, hide the button. #}
+    <noscript><link rel="stylesheet" href="{{ get_url(path='no-js.css', trailing_slash=false, cachebust=true) }}"/></noscript>
+    <script type="text/javascript" src="{{ get_url(path='js/initializeTheme.min.js', trailing_slash=false, cachebust=true) }}"></script>
 
     {%- if config.extra.analytics.service -%}
         {%- include "partials/analytics.html" -%}
