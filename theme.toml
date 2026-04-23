@@ -4,7 +4,7 @@ license = "MIT"
 homepage = "https://github.com/welpo/tabi"
 
 # The minimum version of Zola required
-min_version = "0.17.0"
+min_version = "0.22.1"
 
 # An optional live demo URL
 demo = "https://welpo.github.io/tabi"
@@ -25,11 +25,9 @@ homepage = "https://osc.garden"
 # Translations for tag linking between languages.
 tag_translations = [{ fr = "cartes", en = "maps" }]
 
-# Set browser theme colour. Can be a single colour or [light, dark].
 # Note: Bright colors may be ignored in dark mode.
 # More details: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
-# browser_theme_color = "#ca4963"  # Example of single value.
-# browser_theme_color = ["#ffffff", "#000000"]  # Example of light/dark colours.
+browser_theme_color_default = "#ca4963" # Example of single value.
 
 # Show current language code on the language switcher
 show_selected_language_code_in_language_switcher = false

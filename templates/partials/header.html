@@ -4,7 +4,7 @@
     {%- if macros_settings::evaluate_setting_priority(setting="enable_csp", page=page | default(value=""), section=section | default(value=""), default_global_value="true") == "true" -%}
         {%- include "partials/content_security_policy.html" -%}
     {%- endif -%}
-    
+
     {%- set feed_url = feed_utils::get_feed_url() -%}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,14 +43,8 @@ macros_translate::translate(key="feed_capitalised", default="Atom Feed", languag
 
     <meta name="color-scheme" content="light dark" />
 
-    {%- if config.extra.browser_theme_color and config.extra.browser_theme_color is iterable -%}
-        {# Handle array values: theme_color[0] for light mode, theme_color[1] for dark mode #}
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ config.extra.browser_theme_color[0] }}" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ config.extra.browser_theme_color[1] }}" />
-    {%- elif config.extra.browser_theme_color -%}
-        {# Handle single value #}
-        <meta name="theme-color" content="{{ config.extra.browser_theme_color }}" />
-    {%- endif -%}
+    {# Handle single value #}
+    <meta name="theme-color" content="{{ config.extra.browser_theme_color_default }}" />
 
     {%- if page.description %}
         <meta name="description" content="{{ page.description }}" />
@@ -108,8 +102,9 @@ macros_translate::translate(key="feed_capitalised", default="Atom Feed", languag
 
     <meta property="og:site_name" content="{{ config.title }}">
 
-    {# If JavaScript is disabled, hide the button. #}
+    {# If JavaScript is disabled, hide elements depending on it. #}
     <noscript><link rel="stylesheet" href="{{ get_url(path='no-js.css', trailing_slash=false, cachebust=true) }}"/></noscript>
+
     <script type="text/javascript" src="{{ get_url(path='js/initializeTheme.min.js', trailing_slash=false, cachebust=true) }}"></script>
 
     {%- if config.extra.analytics.service -%}

@@ -1,6 +1,6 @@
 // Runs immediately: before paint, no DOM elements needed
 (function() {
-    const THEMES = { LIGHT: 'light', DARK: 'dark' };
+    let THEMES = { LIGHT: 'light', DARK: 'dark' };
 
     function getSystemTheme() {
         return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -12,19 +12,19 @@
         return Object.values(THEMES).includes(theme);
     }
 
-    const saved = localStorage.getItem('theme');
-    const currentTheme = isValidTheme(saved) ? saved : getSystemTheme();
+    let saved = localStorage.getItem('theme');
+    let currentTheme = isValidTheme(saved) ? saved : getSystemTheme();
 
     document.documentElement.setAttribute('data-theme', currentTheme);
 })();
 
 // Runs after DOM is ready: needs DOM elements
 document.addEventListener('DOMContentLoaded', function() {
-    const THEMES = { LIGHT: 'light', DARK: 'dark' };
-    const FAVICON = { DEFAULT: '/favicon.svg', DARK: '/favicon-dark.svg' };
+    let THEMES = { LIGHT: 'light', DARK: 'dark' };
+    let FAVICON = { DEFAULT: '/favicon.svg', DARK: '/favicon-dark.svg' };
 
-    const themeSwitcher = document.querySelector('.theme-switcher');
-    const faviconEl = document.getElementById('favicon-svg');
+    let themeSwitcher = document.querySelector('.theme-switcher');
+    let faviconEl = document.getElementById('favicon-svg');
 
     function getSystemTheme() {
         return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -46,6 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', theme);
         window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
         currentTheme = theme;
+
+        // Navigator accent color
+        let styles = getComputedStyle(document.documentElement);
+        // Color should have updated: the variable is driven by the theme in CSS
+        let color = styles.getPropertyValue('--primary-color').trim();
+        document.querySelector('meta[name="theme-color"]').content = color;
     }
 
     function switchTheme() {
@@ -59,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    const saved = localStorage.getItem('theme');
+    let saved = localStorage.getItem('theme');
     let currentTheme = isValidTheme(saved) ? saved : getSystemTheme();
 
     setTheme(currentTheme);
