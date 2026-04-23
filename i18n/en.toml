@@ -41,7 +41,6 @@ language_selection = "Language selection"
 toggle_mode = "Toggle $MODE mode"         # $MODE will be replaced by a value (or both) below.
 dark = "dark"
 light = "light"
-reset_mode = "Reset mode to default"
 
 # Quick navigation buttons.
 toggle_toc = "Toggle Table of Contents"

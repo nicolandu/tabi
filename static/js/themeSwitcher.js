@@ -1,6 +1,5 @@
 // Get the theme switcher button elements.
 const themeSwitcher = document.querySelector('.theme-switcher');
-const themeResetter = document.querySelector('.theme-resetter');
 const defaultTheme = document.documentElement.getAttribute('data-default-theme');
 
 function getSystemThemePreference() {
@@ -30,10 +29,6 @@ function setTheme(theme, saveToLocalStorage = false) {
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
 }
 
-function resetTheme() {
-    setTheme(defaultTheme || getSystemThemePreference());
-}
-
 // Function to switch between dark and light themes.
 function switchTheme() {
     setTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
@@ -41,14 +36,12 @@ function switchTheme() {
 
 // Initialize the theme switcher button.
 themeSwitcher.addEventListener('click', switchTheme);
-themeResetter.addEventListener('click', resetTheme);
 
 // Update the theme based on system preference if necessary.
 if (!defaultTheme) {
     window
         .matchMedia('(prefers-color-scheme: dark)')
         .addEventListener('change', (e) => {
-            setTheme(e.matches ? 'dark' : 'light');
             document.getElementById('favicon-svg').href = e.matches ? '/favicon-dark.svg' : '/favicon.svg';
         });
 }
@@ -63,13 +56,8 @@ if (localStorage.getItem('theme')) {
 function handleThemeTogglerKeydown(event) {
     if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        if (event.target === themeSwitcher) {
-            switchTheme();
-        } else if (event.target === themeResetter) {
-            resetTheme();
-        }
+        switchTheme();
     }
 }
 
 themeSwitcher.addEventListener('keydown', handleThemeTogglerKeydown);
-themeResetter.addEventListener('keydown', handleThemeTogglerKeydown);

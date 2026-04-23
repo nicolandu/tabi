@@ -30,18 +30,17 @@ jump_to_posts = "Aller aux articles"
 read_more = "Lire plus"
 one_posts = "$NUMBER article"
 many_posts = "$NUMBER articles"
-prev = "Précédent"                                          # As in "Previous" page.
-next = "Suivant"                                            # As in "Next" page.
-of = "de"                                                   # E.g. Page 1 "of" 3
+prev = "Précédent"                            # As in "Previous" page.
+next = "Suivant"                              # As in "Next" page.
+of = "de"                                     # E.g. Page 1 "of" 3
 all_posts = "Tous les articles"
 all_tags = "Toutes les étiquettes"
 all_projects = "Tous les projets"
 featured_projects = "Projets à la une"
 language_selection = "Sélection de la langue"
-toggle_mode = "Basculer en mode $MODE"                      # $MODE will be replaced by a value (or both) below.
+toggle_mode = "Basculer en mode $MODE"        # $MODE will be replaced by a value (or both) below.
 dark = "sombre"
 light = "clair"
-reset_mode = "Réinitialiser le mode aux valeurs par défaut"
 
 # Quick navigation buttons.
 toggle_toc = "Afficher/Masquer la table des matières"
